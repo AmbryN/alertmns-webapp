@@ -1,27 +1,38 @@
-# AngularSocket
+# Instant Messaging Frontend - Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+The project aims to emulate the functionality of an instant messaging service (e.g. Discord, Google Workspace), i.e.
+being able to create public and private discussions channels, sending and receiving instant messages, organizing
+meetings in channels, sending attachements, notifying users of a new message or meeting in one of the channels
+they subscribed to.
 
-## Development server
+This frontend application is designed to wire up with the Jakarta EE REST API, developed in parallel.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Use case
 
-## Code scaffolding
+This project is part of Metz Numeric School's curriculum for Software Engineering, and the School acts as the customer,
+i.e., expressing needs and specifications.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Metz Numeric School is interested in the benefits of already available instant messaging solutions but wishes for its
+data to remain closed to giants like Google or Discord.
+The project is designed to help students apply design and programming knowledge on a product that could eventually
+be used in production by the school.
 
-## Build
+## Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Planned features
+* Authentication and Authorization through JWT
+* Displaying Channels
+* Allowing users to send and receive messages through WebSockets in the channels in which they are a member of
+* Creating private discussion channels
+* Creating Meetings and inviting Users to partake in a specific Channel
+* Adding File attachements to messages
+* Getting notified of new messages and meetings
+* Admin view for channels and users administration
 
-## Running unit tests
+## Built With
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* [Angular](https://angular.io/)
 
-## Running end-to-end tests
+## Authors
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* **AmbryN** - *Initial work* - [AmbryN](https://github.com/AmbryN)
