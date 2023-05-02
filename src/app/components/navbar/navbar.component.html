@@ -1,0 +1,16 @@
+<header>
+  <div *ngIf="connectedUser" id="search_panel">
+    <form>
+        <mat-icon>search</mat-icon>
+        <input matInput placeholder="Rechercher"/>
+    </form>
+  </div>
+  <div *ngIf="connectedUser" id="profile_panel">
+    <button mat-fab [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled>{{ connectedUser.firstname }} {{ connectedUser.lastname }}</button>
+      <button mat-menu-item (click)="onLogout()"><mat-icon>logout</mat-icon>Déconnexion</button>
+    </mat-menu>
+
+  </div>
+</header>

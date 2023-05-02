@@ -1,0 +1,36 @@
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
+import { AppState } from '../../state/App.state';
+import { Store } from '@ngrx/store';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+})
+export class LoginComponent {
+  constructor(
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
+    private router: Router,
+    private store: Store<AppState>
+  ) {}
+  form: FormGroup = this.formBuilder.group({
+    email: ['', [Validators.email, Validators.required]],
+    password: ['', [Validators.required]],
+  });
+  error = { isErr: false, message: '' };
+  loginError$ = this.loginService.getLoginError();
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.loginService.login(this.form.value);
+    }
+  }
+
+  resetError(): void {
+    this.loginService.resetLoginError();
+  }
+}

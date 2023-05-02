@@ -1,0 +1,6 @@
+<aside>
+  {{ result }}
+  <div *ngIf="isConnected$ | async" id="channels">
+    <app-channel-badge *ngFor="let channel of channels$ | async" [channel]="channel"></app-channel-badge>
+  </div>
+</aside>

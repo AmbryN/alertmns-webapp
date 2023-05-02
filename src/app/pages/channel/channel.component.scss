@@ -1,0 +1,15 @@
+#channel {
+  min-height: 93vh;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#messages {
+  flex: 8;
+}
+
+#message_box {
+  flex: 2;
+}

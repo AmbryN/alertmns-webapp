@@ -1,0 +1,50 @@
+header {
+  background-color: #3E4160;
+  height: 7vh;
+  display: flex;
+}
+
+#search_panel {
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  input {
+    background-color: #818296;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5em 1em 0.5em 3em;
+    margin-right: 110px;
+    width: 20vw;
+    color: #FFFFFF;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      position: relative;
+      left: 30px;
+      color: #FF9763;
+    }
+  }
+
+}
+
+#profile_panel {
+  flex: 1;
+
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    margin-right: 2em;
+
+    mat-icon {
+      margin: auto;
+      color: #FF9763;
+    }
+  }
+}

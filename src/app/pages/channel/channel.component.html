@@ -1,0 +1,9 @@
+<div id="channel">
+  <div id="messages">
+    <div *ngFor="let message of messages$ | async">{{message.content}}</div>
+  </div>
+  <div id="message_box">
+    <input type="text" id="message" [(ngModel)]="message" (keydown.enter)="addMessage()">
+    <button (click)="addMessage()">Envoyer</button>
+  </div>
+</div>

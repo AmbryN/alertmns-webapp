@@ -1,0 +1,21 @@
+<div id="content">
+
+  <div id="panel">
+    <h2>Connexion</h2>
+    <app-error *ngIf="loginError$ | async as error" [message]="error.message"></app-error>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup)="resetError()">
+      <mat-form-field class="form_group">
+        <mat-label>Adresse e-mail</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="name@example.com"/>
+        <mat-error *ngIf="form.get('email')?.hasError">L'e-mail est obligatoire</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form_group">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="xxxxxx"/>
+        <mat-error *ngIf="form.get('password')?.hasError">Mot de passe obligatoire</mat-error>
+      </mat-form-field>
+      <button type="submit">Login</button>
+    </form>
+    <a [href]="['/retrieve']">Mot de passe oublié ?</a>
+  </div>
+</div>
