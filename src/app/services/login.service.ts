@@ -5,6 +5,7 @@ import { BehaviorSubject, map, Observable, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { AppError } from '../models/AppError';
 import { TokenResponse } from '../models/TokenResponse';
+import { baseUrl } from './baseUrl';
 
 @Injectable({
   providedIn: 'root',
@@ -19,12 +20,10 @@ export class LoginService {
   }
   login(user: User): void {
     this.http
-      .post<TokenResponse>('http://localhost:8080/discord/api/login', user)
+      .post<TokenResponse>(baseUrl + '/login', user)
       .pipe(
         tap((tokenRes) => localStorage.setItem('jwt', tokenRes.token)),
-        switchMap((_) =>
-          this.http.get<User>('http://localhost:8080/discord/api/users/profile')
-        )
+        switchMap((_) => this.http.get<User>(baseUrl + '/users/profile'))
       )
       .subscribe({
         next: (user) => {
@@ -72,7 +71,7 @@ export class LoginService {
 
     if (jwt) {
       this.http
-        .get<User>('http://localhost:8080/discord/api/users/profile')
+        .get<User>(baseUrl + '/users/profile')
         .subscribe((user) => this.loggedInUser$.next(user));
     }
   }

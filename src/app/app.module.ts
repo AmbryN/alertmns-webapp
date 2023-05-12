@@ -29,6 +29,9 @@ import { channelReducer } from './state/channels/channel.reducers';
 import { ChannelEffects } from './state/channels/channel.effects';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HomeComponent } from './pages/home/home.component';
+import { SidePanelComponent } from './components/side-panel/side-panel.component';
+import { MessageComponent } from './components/message/message.component';
+import { FullnamePipe } from './pipes/fullname.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { HomeComponent } from './pages/home/home.component';
     ChannelBadgeComponent,
     ShortChannelPipe,
     HomeComponent,
+    SidePanelComponent,
+    MessageComponent,
+    FullnamePipe,
   ],
   imports: [
     BrowserModule,

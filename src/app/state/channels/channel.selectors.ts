@@ -8,3 +8,8 @@ export const selectAllChannels = createSelector(
   selectChannels,
   (state: ChannelState) => state.channels
 );
+
+export const selectedChannel = createSelector(
+  selectChannels,
+  (state: ChannelState) => state.selectedChannel
+);

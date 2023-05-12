@@ -8,7 +8,7 @@ export const selectAllMessages = createSelector(
   (state: MessageState) => state.messages
 );
 
-export const selectMessageToSend = createSelector(
-  selectMessages,
-  (state: MessageState) => state.messageToSend
-);
+// export const selectMessageToSend = createSelector(
+//   selectMessages,
+//   (state: MessageState) => state.messageToSend
+// );

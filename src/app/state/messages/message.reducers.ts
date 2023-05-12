@@ -41,7 +41,6 @@ export const messageReducer = createReducer(
   // Load existing messages
   on(loadMessages, (state, { channelId }) => ({
     ...state,
-    // messages: [],
     status: 'loading',
   })),
   on(loadMessagesSuccess, (state, { messages }) => ({

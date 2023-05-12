@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'channels/:id',
     component: ChannelComponent,
-    canActivate: [UserGuard],
+    canActivate: [],
   },
   {
     path: '**',

@@ -1,35 +1,51 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Message } from '../models/Message';
-import { Observable } from 'rxjs';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/App.state';
 import { receiveMessage } from '../state/messages/message.action';
-
-const messageSocketUrl = 'ws://localhost:8080/discord/socket/';
+import { baseUrl } from './baseUrl';
+import { CompatClient, Stomp } from '@stomp/stompjs';
+const messageSocketUrl: string = `ws://localhost:8080/alert-mns/chat`;
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
-  public subject: WebSocketSubject<Message> | undefined;
+  stompClient?: CompatClient;
 
   constructor(private http: HttpClient, private store: Store<AppState>) {}
 
   getMessages(channelId: number): Observable<Message[]> {
-    this.subject?.unsubscribe();
-    this.subject = webSocket(messageSocketUrl + channelId);
-    this.subject.subscribe((message) =>
-      this.store.dispatch(receiveMessage({ message }))
+    this.stompClient?.disconnect();
+    const connectionToken = localStorage.getItem('jwt')
+      ? `&token=Bearer ${localStorage.getItem('jwt')}`
+      : '';
+    this.stompClient = Stomp.client(
+      messageSocketUrl + `?channel=${channelId}` + connectionToken
     );
+    this.stompClient.connect({}, (frame: any) => {
+      this.stompClient!.subscribe(
+        `/topic/messages/${channelId}`,
+        (message: any) => {
+          this.store.dispatch(
+            receiveMessage({ message: JSON.parse(message.body) })
+          );
+        }
+      );
+    });
 
     return this.http.get<Message[]>(
-      `http://localhost:8080/discord/api/channels/${channelId}/messages`
+      baseUrl + `/channels/${channelId}/messages`
     );
   }
 
-  saveMessage(message: Message): void {
-    return this.subject?.next(message);
+  saveMessage(channelId: number, message: Message): Observable<any> {
+    this.stompClient!.publish({
+      destination: `/app/chat/${channelId}`,
+      body: JSON.stringify(message),
+    });
+    return of();
   }
 }

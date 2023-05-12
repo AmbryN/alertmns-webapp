@@ -8,7 +8,7 @@ export const loadMessages = createAction(
 
 export const sendMessage = createAction(
   '[Channel Page] Add message',
-  props<{ message: Message }>()
+  props<{ channelId: number; message: Message }>()
 );
 
 export const receiveMessage = createAction(

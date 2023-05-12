@@ -11,8 +11,7 @@ import {
   sendMessageSuccess,
   sendMessageFailure,
 } from './message.action';
-import { catchError, from, map, of, switchMap, withLatestFrom } from 'rxjs';
-import { selectMessageToSend } from './message.selectors';
+import { catchError, from, map, of, switchMap } from 'rxjs';
 
 @Injectable()
 export class MessageEffects {
@@ -39,7 +38,9 @@ export class MessageEffects {
       this.actions$.pipe(
         ofType(sendMessage),
         switchMap((action) =>
-          of(this.messageService.saveMessage(action.message)).pipe(
+          from(
+            this.messageService.saveMessage(action.channelId, action.message)
+          ).pipe(
             map((_) => sendMessageSuccess()),
             catchError((error) => of(sendMessageFailure({ error: error })))
           )

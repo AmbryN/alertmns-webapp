@@ -1,0 +1,29 @@
+.message {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5em;
+  border: 1px solid #d9d9d9;
+  border-radius: 7px;
+  padding: 0.5em;
+
+  #username {
+    flex: 2;
+    margin-left: 1em;
+    color: #818296;
+    text-align: center;
+  }
+
+  div {
+    margin-left: 1em;
+    flex: 20;
+    font-weight: bold;
+  }
+
+}
+
+mat-icon {
+  color: #ED6636;
+  width: fit-content;
+  height: fit-content;
+  font-size: xx-large;
+}
