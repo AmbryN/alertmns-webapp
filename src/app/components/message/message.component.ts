@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Message } from '../../models/Message';
+import { IncomingMessage } from '../../models/IncomingMessage';
 
 @Component({
   selector: 'app-message',
@@ -7,5 +7,9 @@ import { Message } from '../../models/Message';
   styleUrls: ['./message.component.scss'],
 })
 export class MessageComponent {
-  @Input() message: Message = { userId: 0, content: 'Contenu', id: 0 };
+  @Input() message: IncomingMessage = {
+    sender: { email: '' },
+    content: 'Contenu',
+    channelId: 0,
+  };
 }

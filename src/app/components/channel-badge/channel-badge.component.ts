@@ -12,6 +12,5 @@ export class ChannelBadgeComponent {
     name: 'Test',
     visibility: 'PUBLIC',
     members: [],
-    messages: [],
   };
 }

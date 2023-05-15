@@ -12,15 +12,15 @@
         <app-message [message]="message"></app-message>
       </ng-container>
     </div>
-    <div id="message_input">
+    <form id="message_input" [formGroup]="messageForm" (ngSubmit)="addMessage()">
       <button class="button">
         <mat-icon>upload</mat-icon>
       </button>
-      <input type="text" id="message" [(ngModel)]="message" (keydown.enter)="addMessage()">
+      <input type="text" id="message" formControlName="message">
       <button class="button" (click)="addMessage()">
         <mat-icon>send</mat-icon>
       </button>
-    </div>
+    </form>
   </div>
   <app-side-panel title="Fichier" [list]="channel.members"></app-side-panel>
 

@@ -5,7 +5,7 @@ import { User } from '../models/User';
   name: 'fullname',
 })
 export class FullnamePipe implements PipeTransform {
-  transform(user: User, ...args: unknown[]): unknown {
+  transform(user: User, ...args: unknown[]): string {
     return `${user.firstname} ${user.lastname}`;
   }
 }

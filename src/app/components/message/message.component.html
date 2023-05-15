@@ -1,5 +1,5 @@
 <div class="message">
   <mat-icon>person</mat-icon>
-  <div id="username">{{ message.userId }}</div>
+  <div id="username">{{ message.sender | fullname }}</div>
   <div>{{ message.content }}</div>
 </div>

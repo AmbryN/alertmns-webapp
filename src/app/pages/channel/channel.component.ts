@@ -6,7 +6,10 @@ import { AppState } from '../../state/App.state';
 import { ActivatedRoute } from '@angular/router';
 import { loadChannel } from '../../state/channels/channel.action';
 import { selectedChannel } from '../../state/channels/channel.selectors';
-import { MessageService } from '../../services/message.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../models/User';
+import { LoginService } from '../../services/login.service';
+import { delay, tap } from 'rxjs';
 
 @Component({
   selector: 'app-channel',
@@ -15,12 +18,25 @@ import { MessageService } from '../../services/message.service';
 })
 export class ChannelComponent {
   @ViewChild('messages_id') container!: ElementRef;
-  message: string = '';
-  messages$ = this.store.select(selectAllMessages);
-  private channelId: number | undefined;
-  selectedChannel$ = this.store.select(selectedChannel);
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+  selectedChannel$ = this.store.select(selectedChannel);
+  messages$ = this.store.select(selectAllMessages);
+
+  messageForm = new FormGroup({
+    message: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1),
+    ]),
+  });
+
+  private channelId: number = Number(this.route.snapshot.paramMap.get('id'));
+  private currentUser: User | null = null;
+
+  constructor(
+    private store: Store<AppState>,
+    private route: ActivatedRoute,
+    private loginService: LoginService
+  ) {
     this.route.params.subscribe((params) => {
       this.channelId = params['id'];
       if (this.channelId) {
@@ -28,10 +44,19 @@ export class ChannelComponent {
         this.store.dispatch(loadMessages({ channelId: this.channelId }));
       }
     });
+
+    this.loginService.loggedInUser$.subscribe(
+      (user) => (this.currentUser = user)
+    );
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.scrollDown(), 200);
+    this.messages$
+      .pipe(
+        delay(50),
+        tap(() => this.scrollDown())
+      )
+      .subscribe();
   }
 
   scrollDown(): void {
@@ -39,13 +64,16 @@ export class ChannelComponent {
   }
 
   addMessage(): void {
-    this.store.dispatch(
-      sendMessage({
-        channelId: this.channelId!,
-        message: { id: 1, userId: 1, content: this.message },
-      })
-    );
-    this.message = '';
-    setTimeout(() => this.scrollDown(), 200);
+    if (this.messageForm.valid) {
+      this.store.dispatch(
+        sendMessage({
+          message: {
+            channelId: this.channelId,
+            userId: this.currentUser!.id!,
+            content: this.messageForm.value.message!,
+          },
+        })
+      );
+    }
   }
 }
