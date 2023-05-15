@@ -20,17 +20,12 @@ export class ChannelComponent {
   private channelId: number | undefined;
   selectedChannel$ = this.store.select(selectedChannel);
 
-  constructor(
-    private store: Store<AppState>,
-    private route: ActivatedRoute,
-    private messageService: MessageService
-  ) {
+  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     this.route.params.subscribe((params) => {
       this.channelId = params['id'];
       if (this.channelId) {
         this.store.dispatch(loadChannel({ channelId: this.channelId }));
         this.store.dispatch(loadMessages({ channelId: this.channelId }));
-        this.messageService.getMessages(this.channelId);
       }
     });
   }
