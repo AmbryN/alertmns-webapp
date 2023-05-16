@@ -4,14 +4,14 @@ import { MessageService } from '../../services/message.service';
 import { AppState } from '../App.state';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
-  sendMessage,
   loadMessages,
   loadMessagesFailure,
   loadMessagesSuccess,
-  sendMessageSuccess,
+  sendMessage,
   sendMessageFailure,
+  sendMessageSuccess,
 } from './message.action';
-import { catchError, from, map, of, switchMap } from 'rxjs';
+import { catchError, from, map, of, switchMap, tap } from 'rxjs';
 
 @Injectable()
 export class MessageEffects {
@@ -25,7 +25,8 @@ export class MessageEffects {
     this.actions$.pipe(
       ofType(loadMessages),
       switchMap((action) =>
-        from(this.messageService.getMessages(action.channelId)).pipe(
+        this.messageService.getMessages(action.channelId).pipe(
+          tap(() => this.messageService.connect(action.channelId)),
           map((messages) => loadMessagesSuccess({ messages: messages })),
           catchError((error) => of(loadMessagesFailure({ error: error })))
         )
@@ -38,9 +39,7 @@ export class MessageEffects {
       this.actions$.pipe(
         ofType(sendMessage),
         switchMap((action) =>
-          from(
-            this.messageService.saveMessage(action.channelId, action.message)
-          ).pipe(
+          from(this.messageService.saveMessage(action.message)).pipe(
             map((_) => sendMessageSuccess()),
             catchError((error) => of(sendMessageFailure({ error: error })))
           )

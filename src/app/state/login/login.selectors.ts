@@ -1,14 +1,15 @@
-import { createSelector } from '@ngrx/store';
 import { AppState } from '../App.state';
-import { MessageState } from './message.reducers';
+import { createSelector } from '@ngrx/store';
+import { LoginState } from './login.reducers';
 
-export const selectMessages = (state: AppState) => state.messages;
-export const selectAllMessages = createSelector(
-  selectMessages,
-  (state: MessageState) => state.messages
+export const selectLogin = (state: AppState) => state.login;
+
+export const selectCurrentUser = createSelector(
+  selectLogin,
+  (state: LoginState) => state.user
 );
 
-// export const selectMessageToSend = createSelector(
-//   selectMessages,
-//   (state: MessageState) => state.messageToSend
-// );
+export const selectLoginError = createSelector(
+  selectLogin,
+  (state) => state.error
+);

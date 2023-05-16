@@ -9,7 +9,8 @@ import { selectedChannel } from '../../state/channels/channel.selectors';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/User';
 import { LoginService } from '../../services/login.service';
-import { delay, tap } from 'rxjs';
+import { delay, Observable, tap } from 'rxjs';
+import { selectCurrentUser } from '../../state/login/login.selectors';
 
 @Component({
   selector: 'app-channel',
@@ -21,6 +22,12 @@ export class ChannelComponent {
 
   selectedChannel$ = this.store.select(selectedChannel);
   messages$ = this.store.select(selectAllMessages);
+  scrollSubscription = this.messages$
+    .pipe(
+      delay(50),
+      tap(() => this.scrollDown())
+    )
+    .subscribe();
 
   messageForm = new FormGroup({
     message: new FormControl('', [
@@ -32,11 +39,7 @@ export class ChannelComponent {
   private channelId: number = Number(this.route.snapshot.paramMap.get('id'));
   private currentUser: User | null = null;
 
-  constructor(
-    private store: Store<AppState>,
-    private route: ActivatedRoute,
-    private loginService: LoginService
-  ) {
+  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     this.route.params.subscribe((params) => {
       this.channelId = params['id'];
       if (this.channelId) {
@@ -45,18 +48,9 @@ export class ChannelComponent {
       }
     });
 
-    this.loginService.loggedInUser$.subscribe(
-      (user) => (this.currentUser = user)
-    );
-  }
-
-  ngAfterViewInit() {
-    this.messages$
-      .pipe(
-        delay(50),
-        tap(() => this.scrollDown())
-      )
-      .subscribe();
+    this.store
+      .select(selectCurrentUser)
+      .subscribe((user) => (this.currentUser = user));
   }
 
   scrollDown(): void {
@@ -75,5 +69,9 @@ export class ChannelComponent {
         })
       );
     }
+  }
+
+  ngOnDestroy() {
+    this.scrollSubscription.unsubscribe();
   }
 }

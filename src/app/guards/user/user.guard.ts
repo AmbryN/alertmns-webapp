@@ -6,14 +6,23 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { LoginService } from '../../services/login.service';
+import { filter, map, Observable, take } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../state/App.state';
+import { selectCurrentUser } from '../../state/login/login.selectors';
+import { User } from '../../models/User';
+import { loadProfile } from '../../state/login/login.action';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserGuard implements CanActivate {
-  constructor(private loginService: LoginService, private router: Router) {}
+  currentUser: User | null = null;
+  constructor(private router: Router, private store: Store<AppState>) {
+    this.store
+      .select(selectCurrentUser)
+      .subscribe((user) => (this.currentUser = user));
+  }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -22,10 +31,11 @@ export class UserGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.loginService.loggedInUser$.value != null) return true;
-    else {
-      this.router.navigateByUrl('/login').then();
-      return false;
-    }
+    return this.store.select(selectCurrentUser).pipe(
+      filter((user) => user != null),
+      map((user) => {
+        return true;
+      })
+    );
   }
 }

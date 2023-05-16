@@ -15,3 +15,17 @@ export const loginFailure = createAction(
   '[Login Page] Login failure',
   props<{ error: string }>()
 );
+
+export const loadProfile = createAction('[App] Load Profile');
+
+export const loadProfileSuccess = createAction(
+  '[App] Load Profile Success',
+  props<{ user: User }>()
+);
+
+export const loadProfileFailure = createAction(
+  '[App] Load Profile Failure',
+  props<{ error: string }>()
+);
+
+export const logout = createAction('[App] Logout');

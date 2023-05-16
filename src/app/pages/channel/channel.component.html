@@ -3,9 +3,7 @@
   <div id="view">
     <div id="channel_name">
       <span>Canal : <strong>{{channel.name}}</strong></span>
-      <button class="button">
-        <mat-icon>download</mat-icon>
-      </button>
+      <app-icon-button icon="download" class="button"/>
     </div>
     <div id="messages" #messages_id *ngIf="messages$ | async as messages">
       <ng-container *ngFor="let message of messages">
@@ -13,13 +11,9 @@
       </ng-container>
     </div>
     <form id="message_input" [formGroup]="messageForm" (ngSubmit)="addMessage()">
-      <button class="button">
-        <mat-icon>upload</mat-icon>
-      </button>
+      <app-icon-button icon="upload" class="button"/>
       <input type="text" id="message" formControlName="message">
-      <button class="button" (click)="addMessage()">
-        <mat-icon>send</mat-icon>
-      </button>
+      <app-icon-button icon="send" class="button"/>
     </form>
   </div>
   <app-side-panel title="Fichier" [list]="channel.members"></app-side-panel>

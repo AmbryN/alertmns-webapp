@@ -1,4 +1,4 @@
-import { Message } from '../../models/Message';
+import { OutgoingMessage } from '../../models/OutgoingMessage';
 import { createReducer, on } from '@ngrx/store';
 import {
   sendMessage,
@@ -9,11 +9,12 @@ import {
   sendMessageSuccess,
   sendMessageFailure,
 } from './message.action';
+import { IncomingMessage } from '../../models/IncomingMessage';
 
 export interface MessageState {
   channelId?: number;
-  messages: Message[];
-  messageToSend: Message;
+  messages: IncomingMessage[];
+  messageToSend: OutgoingMessage;
   error: string;
   status: 'pending' | 'loading' | 'error' | 'success';
 }
@@ -21,7 +22,7 @@ export interface MessageState {
 export const initialState: MessageState = {
   channelId: undefined,
   messages: [],
-  messageToSend: {} as Message,
+  messageToSend: {} as OutgoingMessage,
   error: '',
   status: 'pending',
 };

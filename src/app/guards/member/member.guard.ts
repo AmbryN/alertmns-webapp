@@ -2,16 +2,28 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { LoginService } from '../../services/login.service';
+import { filter, map, Observable } from 'rxjs';
+import { AppState } from '../../state/App.state';
+import { Store } from '@ngrx/store';
+import { User } from '../../models/User';
+import { selectCurrentUser } from '../../state/login/login.selectors';
+import { loadProfile } from '../../state/login/login.action';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MemberGuard implements CanActivate {
+  currentUser: User | null = null;
+  constructor(private store: Store<AppState>, private router: Router) {
+    this.store
+      .select(selectCurrentUser)
+      .subscribe((user) => (this.currentUser = user));
+  }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -20,8 +32,18 @@ export class MemberGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return false;
+    const channelId = Number(route.paramMap.get('id'));
+    return this.store.select(selectCurrentUser).pipe(
+      filter((user) => user != null),
+      map((user) => {
+        if (
+          user != null &&
+          user.channels!.filter((channel) => channel.id === channelId).length >
+            0
+        ) {
+          return true;
+        } else return this.router.parseUrl('/');
+      })
+    );
   }
-
-  constructor(private loginService: LoginService) {}
 }

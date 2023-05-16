@@ -29,9 +29,22 @@ import { channelReducer } from './state/channels/channel.reducers';
 import { ChannelEffects } from './state/channels/channel.effects';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HomeComponent } from './pages/home/home.component';
-import { SidePanelComponent } from './components/side-panel/side-panel.component';
+import { SidePanelComponent } from './pages/channel/side-panel/side-panel.component';
 import { MessageComponent } from './components/message/message.component';
 import { FullnamePipe } from './pipes/fullname.pipe';
+import { LoginEffects } from './state/login/login.effects';
+import { loginReducer } from './state/login/login.reducers';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminSidePanelComponent } from './pages/admin/admin-side-panel/admin-side-panel.component';
+import { AdminUsersComponent } from './pages/admin/admin-users/admin-users.component';
+import { AdminGroupsComponent } from './pages/admin/admin-groups/admin-groups.component';
+import { MatTableModule } from '@angular/material/table';
+import { IconButtonComponent } from './components/icon-button/icon-button.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './pages/admin/dialog/dialog.component';
+import { userReducer } from './state/users/user.reducers';
+import { UserEffects } from './state/users/user.effects';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -47,17 +60,33 @@ import { FullnamePipe } from './pipes/fullname.pipe';
     SidePanelComponent,
     MessageComponent,
     FullnamePipe,
+    AdminComponent,
+    AdminSidePanelComponent,
+    AdminUsersComponent,
+    AdminGroupsComponent,
+    IconButtonComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(
-      { messages: messageReducer, channels: channelReducer },
+      {
+        messages: messageReducer,
+        channels: channelReducer,
+        login: loginReducer,
+        users: userReducer,
+      },
       {}
     ),
     FormsModule,
     HttpClientModule,
-    EffectsModule.forRoot([MessageEffects, ChannelEffects]),
+    EffectsModule.forRoot([
+      MessageEffects,
+      ChannelEffects,
+      LoginEffects,
+      UserEffects,
+    ]),
     BrowserAnimationsModule,
     MatInputModule,
     ReactiveFormsModule,
@@ -68,6 +97,9 @@ import { FullnamePipe } from './pipes/fullname.pipe';
     MatListModule,
     MatBadgeModule,
     MatTooltipModule,
+    MatTableModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

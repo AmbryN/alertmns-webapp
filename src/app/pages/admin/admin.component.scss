@@ -1,0 +1,13 @@
+#admin {
+  display: flex;
+  min-height: 93vh;
+}
+
+app-admin-side-panel {
+  flex: 15;
+  background-color: #818296;
+}
+
+#view {
+  flex: 85;
+}

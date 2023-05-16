@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Message } from '../../models/Message';
+import { OutgoingMessage } from '../../models/OutgoingMessage';
+import { IncomingMessage } from '../../models/IncomingMessage';
 
 export const loadMessages = createAction(
   '[Channel Page] Load Messages',
@@ -8,17 +9,17 @@ export const loadMessages = createAction(
 
 export const sendMessage = createAction(
   '[Channel Page] Add message',
-  props<{ channelId: number; message: Message }>()
+  props<{ message: OutgoingMessage }>()
 );
 
 export const receiveMessage = createAction(
-  '[Channel Page] Receive Message',
-  props<{ message: Message }>()
+  '[Channel Page] Receive OutgoingMessage',
+  props<{ message: IncomingMessage }>()
 );
 
 export const loadMessagesSuccess = createAction(
   '[Channel Page] Messages Load Success',
-  props<{ messages: Message[] }>()
+  props<{ messages: IncomingMessage[] }>()
 );
 
 export const loadMessagesFailure = createAction(
@@ -27,10 +28,10 @@ export const loadMessagesFailure = createAction(
 );
 
 export const sendMessageSuccess = createAction(
-  'Channel Page] Message Send Success'
+  'Channel Page] OutgoingMessage Send Success'
 );
 
 export const sendMessageFailure = createAction(
-  'Channel Page] Message Send Failure',
+  'Channel Page] OutgoingMessage Send Failure',
   props<{ error: string }>()
 );

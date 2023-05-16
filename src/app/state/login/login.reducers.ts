@@ -1,68 +1,62 @@
-import { OutgoingMessage } from '../../models/OutgoingMessage';
 import { createReducer, on } from '@ngrx/store';
 import {
-  sendMessage,
-  loadMessages,
-  loadMessagesFailure,
-  loadMessagesSuccess,
-  receiveMessage,
-  sendMessageSuccess,
-  sendMessageFailure,
-} from './message.action';
-import { IncomingMessage } from '../../models/IncomingMessage';
+  loadProfile,
+  loadProfileFailure,
+  loadProfileSuccess,
+  login,
+  loginFailure,
+  loginSuccess,
+  logout,
+} from './login.action';
+import { User } from '../../models/User';
 
-export interface MessageState {
-  channelId?: number;
-  messages: IncomingMessage[];
-  messageToSend: OutgoingMessage;
-  error: string;
+export interface LoginState {
+  user: User | null;
+  error: string | null;
   status: 'pending' | 'loading' | 'error' | 'success';
 }
 
-export const initialState: MessageState = {
-  channelId: undefined,
-  messages: [],
-  messageToSend: {} as OutgoingMessage,
+export const initialState: LoginState = {
+  user: null,
   error: '',
   status: 'pending',
 };
 
-export const messageReducer = createReducer(
+export const loginReducer = createReducer(
   // Supply initial state
   initialState,
   // Add a new message to the messages array
-  on(sendMessage, (state, { message }) => ({
-    ...state,
-    messageToSend: message,
-  })),
-  on(receiveMessage, (state, { message }) => ({
-    ...state,
-    messages: [...state.messages, message],
-  })),
-  // Load existing messages
-  on(loadMessages, (state, { channelId }) => ({
+  on(login, (state, { user }) => ({
     ...state,
     status: 'loading',
   })),
-  on(loadMessagesSuccess, (state, { messages }) => ({
+  on(loginSuccess, (state, { user }) => ({
     ...state,
-    messages: messages,
+    user,
     status: 'success',
-    error: '',
   })),
-  on(loadMessagesFailure, (state, { error }) => ({
+  on(loginFailure, (state, { error }) => ({
     ...state,
-    error: error,
+    error,
     status: 'error',
   })),
-  on(sendMessageSuccess, (state) => ({
+  on(loadProfile, (state) => ({
     ...state,
-    status: 'success',
-    error: '',
+    status: 'loading',
   })),
-  on(sendMessageFailure, (state, { error }) => ({
+  on(loadProfileSuccess, (state, { user }) => ({
     ...state,
+    user,
+    status: 'success',
+  })),
+  on(loadProfileFailure, (state, { error }) => ({
+    ...state,
+    error,
     status: 'error',
-    error: error,
+  })),
+  on(logout, (state) => ({
+    ...state,
+    user: null,
+    status: 'pending',
   }))
 );

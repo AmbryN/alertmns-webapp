@@ -1,0 +1,22 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { AdminSidePanelComponent } from './admin-side-panel.component';
+
+describe('SidePanelComponent', () => {
+  let component: AdminSidePanelComponent;
+  let fixture: ComponentFixture<AdminSidePanelComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [AdminSidePanelComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(AdminSidePanelComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

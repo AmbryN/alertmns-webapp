@@ -1,9 +1,30 @@
 aside {
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   background-color: #000011;
+
+  button {
+    background-color: #000011;
+    border: none;
+    cursor: pointer;
+  }
 }
 
 #channels {
-  position: relative;
-  top: 7vh;
+  flex: 10;
+  margin-top: 7vh;
+}
+
+#admin_settings {
+  flex: 1;
+  text-align: center;
+}
+
+mat-icon {
+  color: #ED6636;
+  width: fit-content;
+  height: fit-content;
+  font-size: xx-large;
 }

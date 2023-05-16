@@ -1,0 +1,34 @@
+main {
+  height: 93vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+#title {
+  flex: 1;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: center;
+
+  span {
+    position: relative;
+    top: 30%;
+  };
+}
+
+#table {
+  flex: 9;
+}
+
+mat-menu {
+  span {
+    color: #FF9763;
+  }
+
+}
+
+mat-spinner {
+  color: #FF9763;
+}

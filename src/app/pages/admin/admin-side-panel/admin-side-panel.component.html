@@ -1,0 +1,10 @@
+<div id="panel">
+  <div id="title">{{title}}</div>
+  <mat-list id="list">
+      <ng-container *ngFor="let item of list">
+        <mat-list-item [routerLink]="item.link" class="list-item">
+          <div matListItemTitle>{{ item.name }}</div>
+        </mat-list-item>
+      </ng-container>
+  </mat-list>
+</div>

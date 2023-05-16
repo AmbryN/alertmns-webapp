@@ -1,50 +1,79 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { MessageService } from '../../services/message.service';
 import { AppState } from '../App.state';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
-  loadMessages,
-  loadMessagesFailure,
-  loadMessagesSuccess,
-  sendMessage,
-  sendMessageFailure,
-  sendMessageSuccess,
-} from './message.action';
-import { catchError, from, map, of, switchMap, tap } from 'rxjs';
+  loadProfile,
+  loadProfileFailure,
+  loadProfileSuccess,
+  login,
+  loginFailure,
+  loginSuccess,
+  logout,
+} from './login.action';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { LoginService } from '../../services/login.service';
+import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 
 @Injectable()
-export class MessageEffects {
+export class LoginEffects {
   constructor(
     private actions$: Actions,
     private store: Store<AppState>,
-    private messageService: MessageService
+    private loginService: LoginService,
+    private router: Router
   ) {}
 
-  loadMessages$ = createEffect(() =>
+  login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadMessages),
+      ofType(login),
       switchMap((action) =>
-        this.messageService.getMessages(action.channelId).pipe(
-          tap(() => this.messageService.connect(action.channelId)),
-          map((messages) => loadMessagesSuccess({ messages: messages })),
-          catchError((error) => of(loadMessagesFailure({ error: error })))
+        this.loginService.login(action.user).pipe(
+          tap((tokenRes) => {
+            localStorage.setItem('jwt', tokenRes.token);
+          }),
+          switchMap((_) =>
+            this.loginService.getProfile().pipe(
+              map((user) => loadProfileSuccess({ user })),
+              tap(() => this.router.navigateByUrl('/')),
+              catchError((error) => {
+                let message = this.loginService.handleError(error);
+                return of(loadProfileFailure({ error: message }));
+              })
+            )
+          ),
+          catchError((error) => {
+            let message = this.loginService.handleError(error);
+            return of(loginFailure({ error: message }));
+          })
         )
       )
     )
   );
 
-  sendMessage$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(sendMessage),
-        switchMap((action) =>
-          from(this.messageService.saveMessage(action.message)).pipe(
-            map((_) => sendMessageSuccess()),
-            catchError((error) => of(sendMessageFailure({ error: error })))
-          )
+  loadProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadProfile),
+      switchMap((action) =>
+        this.loginService.getProfile().pipe(
+          map((user) => loadProfileSuccess({ user })),
+          catchError((error) => {
+            let message = this.loginService.handleError(error);
+            this.router.navigateByUrl('/login');
+            return of(loadProfileFailure({ error: message }));
+          })
         )
-      ),
-    { dispatch: false }
+      )
+    )
+  );
+
+  logout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(logout),
+      switchMap((action) => {
+        this.router.navigateByUrl('/login');
+        return this.loginService.logout();
+      })
+    )
   );
 }

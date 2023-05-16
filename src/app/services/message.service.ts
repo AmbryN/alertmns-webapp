@@ -8,7 +8,7 @@ import { receiveMessage } from '../state/messages/message.action';
 import { baseUrl } from './baseUrl';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { IncomingMessage } from '../models/IncomingMessage';
-const messageSocketUrl: string = `ws://localhost:8080/alert-mns/chat`;
+const messageSocketUrl: string = `ws://localhost:8080/alertmns-api-0.0.1-SNAPSHOT/chat`;
 
 @Injectable({
   providedIn: 'root',

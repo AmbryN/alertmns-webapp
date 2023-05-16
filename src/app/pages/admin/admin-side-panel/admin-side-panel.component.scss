@@ -1,0 +1,40 @@
+ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+li {
+  margin: 0;
+}
+
+#title {
+  color: #FF9763;
+  padding: 0.5em;
+}
+
+#panel {
+  flex: 15;
+  padding: 1.5em 1em;
+  background-color: #818296;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5em;
+  padding: 0.5em 1em;
+  border-radius: 7px;
+  background-color: #d9d9d9;
+
+  div {
+    margin-left: 2em;
+    font-weight: bold;
+  }
+}
+
+mat-icon {
+  color: #ED6636;
+  width: fit-content;
+  height: fit-content;
+  font-size: xx-large;
+}
