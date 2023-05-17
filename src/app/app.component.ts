@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
-import { LoginService } from './services/login.service';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './state/App.state';
 import { loadProfile } from './state/login/login.action';
+import { ErrorService } from './services/error.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +11,8 @@ import { loadProfile } from './state/login/login.action';
 })
 export class AppComponent {
   constructor(
-    private loginService: LoginService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private errorService: ErrorService
   ) {
     this.store.dispatch(loadProfile());
   }

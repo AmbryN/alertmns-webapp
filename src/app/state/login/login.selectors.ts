@@ -9,7 +9,9 @@ export const selectCurrentUser = createSelector(
   (state: LoginState) => state.user
 );
 
-export const selectLoginError = createSelector(
+export const loginError = createSelector(selectLogin, (state) => state.error);
+
+export const selectLoginStatus = createSelector(
   selectLogin,
-  (state) => state.error
+  (state) => state.status
 );

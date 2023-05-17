@@ -1,5 +1,5 @@
 <div id="channel" *ngIf="selectedChannel$ | async as channel">
-  <app-side-panel title="Membres" [list]="channel.members"></app-side-panel>
+  <app-side-panel title="Membres" *ngIf="members$ | async as members" [list]="members"/>
   <div id="view">
     <div id="channel_name">
       <span>Canal : <strong>{{channel.name}}</strong></span>
@@ -16,7 +16,7 @@
       <app-icon-button icon="send" class="button"/>
     </form>
   </div>
-  <app-side-panel title="Fichier" [list]="channel.members"></app-side-panel>
+  <app-side-panel title="Fichier" [list]="[{name: 'Fichier 1', link:'', icon: 'picture_as_pdf'}]"></app-side-panel>
 
   <ng-template #template></ng-template>
 </div>

@@ -3,7 +3,7 @@ aside {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  background-color: #000011;
+  background-color: var(--color-primary-dark);/*#000011;*/
 
   button {
     background-color: #000011;

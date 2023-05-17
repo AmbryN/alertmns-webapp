@@ -28,7 +28,16 @@ export class UserEffects {
         this.userService.getUsers().pipe(
           delay(2000),
           map((users) => loadUsersSuccess({ users })),
-          catchError((error) => of(loadUsersFailure({ error })))
+          catchError((error) => {
+            let message;
+            if (error.status > 500) message = 'Erreur serveur';
+            else if (error.stauts == 403)
+              message =
+                "L'authentification a expiré : veuillez vous reconnecter";
+            else if (error.status > 400) message = error.error.error.message;
+            else message = 'Erreur de connexion';
+            return of(loadUsersFailure({ error: message }));
+          })
         )
       )
     )

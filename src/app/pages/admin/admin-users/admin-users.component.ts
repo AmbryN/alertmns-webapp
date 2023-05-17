@@ -5,7 +5,7 @@ import { AppState } from '../../../state/App.state';
 import { Store } from '@ngrx/store';
 import {
   selectAllUsers,
-  userLoadingStatus,
+  userStatus,
 } from '../../../state/users/user.selectors';
 import { deleteUser, loadUsers } from '../../../state/users/user.action';
 
@@ -17,7 +17,7 @@ import { deleteUser, loadUsers } from '../../../state/users/user.action';
 export class AdminUsersComponent {
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'action'];
   users$ = this.store.select(selectAllUsers);
-  userLoadingStatus$ = this.store.select(userLoadingStatus);
+  userLoadingStatus$ = this.store.select(userStatus);
 
   constructor(public dialog: MatDialog, private store: Store<AppState>) {
     this.store.dispatch(loadUsers());

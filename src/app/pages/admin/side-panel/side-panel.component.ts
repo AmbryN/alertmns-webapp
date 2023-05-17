@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { User } from '../../../models/User';
 
 @Component({
   selector: 'app-side-panel',
@@ -8,5 +7,5 @@ import { User } from '../../../models/User';
 })
 export class SidePanelComponent {
   @Input() title: string = 'Title';
-  @Input() list: User[] = [];
+  @Input() list: { name: string; link: string; icon: string }[] = [];
 }

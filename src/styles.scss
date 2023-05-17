@@ -1,9 +1,145 @@
 @use '@angular/material' as mat;
 
 @include mat.core();
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+//@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '@angular/material/theming';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$primary-palette: (
+  900: #151B36,
+  800: #151B36,
+  700: #151B36,
+  600: #151B36,
+  500: #151B36,
+  400: #151B36,
+  300: #151B36,
+  200: #151B36,
+  100: #151B36,
+   50: #151B36,
+  contrast: (
+    900: #151B36,
+    800: #151B36,
+    700: #151B36,
+    600: #151B36,
+    500: #151B36,
+    400: #151B36,
+    300: #151B36,
+    200: #151B36,
+    100: #151B36,
+    50: #151B36
+  )
+);
 
+$accent-palette: (
+  900: #FF9763,
+  800: #FF9763,
+  700: #FF9763,
+  600: #FF9763,
+  500: #FF9763,
+  400: #FF9763,
+  300: #FF9763,
+  200: #FF9763,
+  100: #FF9763,
+  50:  #FF9763,
+    contrast: (
+      900: #ED6636,
+      800: #ED6636,
+      700: #ED6636,
+      600: #ED6636,
+      500: #ED6636,
+      400: #ED6636,
+      300: #ED6636,
+      200: #ED6636,
+      100: #ED6636,
+      50:  #ED6636,
+    )
+);
+
+$neutral-palette: (
+  900: #000000,
+  800: #030865,
+  700: #1e2578,
+  600: #2b3284,
+  500: #373e90,
+  400: #434a9c,
+  300: #4f56a9,
+  200: #6870c4,
+  100: #8289e0,
+  50:  #9ca4fd,
+  contrast: (
+    900: #000000,
+    800: #030865,
+    700: #1e2578,
+    600: #2b3284,
+    500: #373e90,
+    400: #434a9c,
+    300: #4f56a9,
+    200: #6870c4,
+    100: #8289e0,
+    50:  #9ca4fd,
+  )
+);
+
+$error-palette: (
+  900: #000000,
+  800: #410002,
+  700: #690005,
+  600: #7e0007,
+  500: #93000a,
+  400: #a80710,
+  300: #ba1a1a,
+  200: #de3730,
+  100: #ff5449,
+  50:  #ff897d,
+  contrast: (
+    900: #000000,
+    800: #410002,
+    700: #690005,
+    600: #7e0007,
+    500: #93000a,
+    400: #a80710,
+    300: #ba1a1a,
+    200: #de3730,
+    100: #ff5449,
+    50:  #ff897d,
+  )
+);
+
+$mns-app-primary: mat.define-palette($primary-palette, 500);
+$mns-app-accent:  mat.define-palette($accent-palette, 500);
+$mns-app-error: mat.define-palette($error-palette);
+
+$mns-app-neutral: mat.define-palette($neutral-palette);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$alert-mns-theme: mat.define-light-theme($mns-app-primary, $mns-app-accent, $mns-app-error);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($alert-mns-theme);
+
+$primary: map-get($alert-mns-theme, primary);
+$accent: map-get($alert-mns-theme, accent);
+$warn: map-get($alert-mns-theme, warn);
+
+
+:root {
+  --color-primary-light: #3E4160;
+  --color-primary: #151B36;
+  --color-primary-dark: #000011;
+  --color-accent-light: #FF9763;
+  --color-accent: #ED6636;
+  --color-warn: #{mat-color($warn)};
+  --color-neutral: #818296;
+  --color-neutral-light: #D9D9D9;
+  --color-white: #FFFFFF;
+  --color-on-neutral: #000000;
+}
+
+//"./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"

@@ -10,18 +10,22 @@ export class AdminComponent {
     {
       name: 'Utilisateurs',
       link: 'users',
+      icon: 'person',
     },
     {
       name: 'Groupes',
       link: 'groups',
+      icon: 'groups',
     },
     {
       name: 'Channels',
       link: '',
+      icon: 'forum',
     },
     {
       name: 'Statistiques',
       link: '',
+      icon: 'analytics',
     },
   ];
 }

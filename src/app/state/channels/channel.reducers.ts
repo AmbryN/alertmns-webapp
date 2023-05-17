@@ -10,14 +10,14 @@ import {
 
 export interface ChannelState {
   channels: Channel[];
-  selectedChannel: Channel | null;
+  selectedChannel: Channel;
   error: string;
   status: 'pending' | 'loading' | 'error' | 'success';
 }
 
 export const initialState: ChannelState = {
   channels: [],
-  selectedChannel: null,
+  selectedChannel: { name: '', visibility: 'PUBLIC', members: [] },
   error: '',
   status: 'pending',
 };

@@ -1,5 +1,5 @@
 header {
-  background-color: #3E4160;
+  background-color: var(--color-primary); /*#3E4160;*/
   height: 7vh;
   display: flex;
 }
@@ -44,7 +44,7 @@ header {
 
     mat-icon {
       margin: auto;
-      color: #FF9763;
+      //color: #FF9763;
     }
   }
 }

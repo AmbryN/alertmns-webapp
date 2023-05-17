@@ -1,0 +1,32 @@
+ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+li {
+  margin: 0;
+}
+
+#title {
+  color: #FF9763;
+  padding: 0.5em;
+}
+
+#panel {
+  flex: 15;
+  padding: 1.5em 1em;
+  background-color: var(--color-primary-light);
+}
+
+mat-list-item {
+  margin-top: 0.2em;
+  padding: 0.5em 1em;
+  border-radius: 7px;
+  background-color: var(--color-neutral);
+
+  div {
+    font-weight: bold;
+    color: var(--color-on-neutral);
+  }
+}
+

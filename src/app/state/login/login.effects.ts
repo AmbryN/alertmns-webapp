@@ -8,12 +8,11 @@ import {
   loadProfileSuccess,
   login,
   loginFailure,
-  loginSuccess,
   logout,
 } from './login.action';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { LoginService } from '../../services/login.service';
-import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class LoginEffects {

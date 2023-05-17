@@ -13,7 +13,6 @@ import { MessageEffects } from './state/messages/message.effects';
 import { LoginComponent } from './pages/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
-import { ErrorComponent } from './components/error/error.component';
 import { MatCardModule } from '@angular/material/card';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,13 +28,13 @@ import { channelReducer } from './state/channels/channel.reducers';
 import { ChannelEffects } from './state/channels/channel.effects';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HomeComponent } from './pages/home/home.component';
-import { SidePanelComponent } from './pages/channel/side-panel/side-panel.component';
+import { ChannelSidePanelComponent } from './pages/channel/channel-side-panel/channel-side-panel.component';
 import { MessageComponent } from './components/message/message.component';
 import { FullnamePipe } from './pipes/fullname.pipe';
 import { LoginEffects } from './state/login/login.effects';
 import { loginReducer } from './state/login/login.reducers';
 import { AdminComponent } from './pages/admin/admin.component';
-import { AdminSidePanelComponent } from './pages/admin/admin-side-panel/admin-side-panel.component';
+import { SidePanelComponent } from './pages/admin/side-panel/side-panel.component';
 import { AdminUsersComponent } from './pages/admin/admin-users/admin-users.component';
 import { AdminGroupsComponent } from './pages/admin/admin-groups/admin-groups.component';
 import { MatTableModule } from '@angular/material/table';
@@ -45,23 +44,23 @@ import { DialogComponent } from './pages/admin/dialog/dialog.component';
 import { userReducer } from './state/users/user.reducers';
 import { UserEffects } from './state/users/user.effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChannelComponent,
     LoginComponent,
-    ErrorComponent,
     NavbarComponent,
     SidebarComponent,
     ChannelBadgeComponent,
     ShortChannelPipe,
     HomeComponent,
-    SidePanelComponent,
+    ChannelSidePanelComponent,
     MessageComponent,
     FullnamePipe,
     AdminComponent,
-    AdminSidePanelComponent,
+    SidePanelComponent,
     AdminUsersComponent,
     AdminGroupsComponent,
     IconButtonComponent,
@@ -100,6 +99,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTableModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

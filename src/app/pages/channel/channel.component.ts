@@ -8,8 +8,7 @@ import { loadChannel } from '../../state/channels/channel.action';
 import { selectedChannel } from '../../state/channels/channel.selectors';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/User';
-import { LoginService } from '../../services/login.service';
-import { delay, Observable, tap } from 'rxjs';
+import { delay, map, tap } from 'rxjs';
 import { selectCurrentUser } from '../../state/login/login.selectors';
 
 @Component({
@@ -21,6 +20,15 @@ export class ChannelComponent {
   @ViewChild('messages_id') container!: ElementRef;
 
   selectedChannel$ = this.store.select(selectedChannel);
+  members$ = this.selectedChannel$.pipe(
+    map((channel) => channel.members),
+    map((members) => {
+      return members.map((member) => {
+        return { name: member.firstname!, link: '', icon: 'person' };
+      });
+    })
+  );
+
   messages$ = this.store.select(selectAllMessages);
   scrollSubscription = this.messages$
     .pipe(

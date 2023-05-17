@@ -12,7 +12,7 @@ import { User } from '../../models/User';
 
 export interface LoginState {
   user: User | null;
-  error: string | null;
+  error: string;
   status: 'pending' | 'loading' | 'error' | 'success';
 }
 

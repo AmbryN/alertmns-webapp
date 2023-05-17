@@ -10,7 +10,12 @@ export const selectAllUsers = createSelector(
   (state: UserState) => state.users
 );
 
-export const userLoadingStatus = createSelector(
+export const userStatus = createSelector(
   selectUsers,
   (state: UserState) => state.status
+);
+
+export const userError = createSelector(
+  selectUsers,
+  (state: UserState) => state.error
 );
