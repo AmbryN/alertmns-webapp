@@ -1,9 +1,11 @@
 main {
-  height: 93vh;
+  width: 82vw;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0.5em;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: space-between;
+  background-color: var(--color-neutral-light);
 }
 
 #title {
@@ -11,6 +13,9 @@ main {
   font-weight: bold;
   text-align: center;
   vertical-align: center;
+  background-color: var(--color-white);
+  border-radius: 7px;
+  margin-bottom: 0.5em;
 
   span {
     position: relative;
@@ -18,17 +23,13 @@ main {
   };
 }
 
-#table {
-  flex: 9;
-}
-
-mat-menu {
-  span {
-    color: #FF9763;
-  }
-
+#users {
+  flex: 20;
+  background-color: var(--color-white);
+  padding: 2em;
+  border-radius: 7px;
 }
 
 mat-spinner {
-  color: #FF9763;
+  margin: auto;
 }

@@ -28,7 +28,6 @@ import { channelReducer } from './state/channels/channel.reducers';
 import { ChannelEffects } from './state/channels/channel.effects';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HomeComponent } from './pages/home/home.component';
-import { ChannelSidePanelComponent } from './pages/channel/channel-side-panel/channel-side-panel.component';
 import { MessageComponent } from './components/message/message.component';
 import { FullnamePipe } from './pipes/fullname.pipe';
 import { LoginEffects } from './state/login/login.effects';
@@ -56,7 +55,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ChannelBadgeComponent,
     ShortChannelPipe,
     HomeComponent,
-    ChannelSidePanelComponent,
     MessageComponent,
     FullnamePipe,
     AdminComponent,

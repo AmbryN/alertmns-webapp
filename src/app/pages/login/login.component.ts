@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { AppState } from '../../state/App.state';
 import { Store } from '@ngrx/store';
 import { login } from '../../state/login/login.action';
-import { loginError } from '../../state/login/login.selectors';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +22,6 @@ export class LoginComponent {
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.required]],
   });
-  loginError$ = this.store.select(loginError);
 
   onSubmit() {
     if (this.form.valid) {

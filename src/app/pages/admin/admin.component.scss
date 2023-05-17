@@ -1,13 +1,9 @@
-#admin {
+main {
   display: flex;
   min-height: 93vh;
-}
 
-app-admin-side-panel {
-  flex: 15;
-  background-color: var(--color-primary-light);
-}
-
-#view {
-  flex: 85;
+  app-side-panel {
+    width: 15vw;
+    background-color: var(--color-primary-light);
+  }
 }

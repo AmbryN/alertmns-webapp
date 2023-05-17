@@ -24,7 +24,11 @@ export class ChannelComponent {
     map((channel) => channel.members),
     map((members) => {
       return members.map((member) => {
-        return { name: member.firstname!, link: '', icon: 'person' };
+        return {
+          name: `${member.firstname!} ${member.lastname!}`,
+          link: '',
+          icon: 'person',
+        };
       });
     })
   );

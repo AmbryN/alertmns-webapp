@@ -26,7 +26,6 @@ export class UserEffects {
       ofType(loadUsers),
       switchMap((action) =>
         this.userService.getUsers().pipe(
-          delay(2000),
           map((users) => loadUsersSuccess({ users })),
           catchError((error) => {
             let message;
