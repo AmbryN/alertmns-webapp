@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Ajouter un utilisateur</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="userForm">
+    <mat-form-field>
+      <mat-label>Prénom</mat-label>
+      <input matInput type="text" formControlName="firstname">
+      <mat-error *ngIf="userForm.get('firstname')?.hasError">Le prénom est obligatoire</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input matInput type="text" formControlName="lastname">
+      <mat-error *ngIf="userForm.get('lastname')?.hasError">Le nom est obligatoire</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+      <input matInput type="email" formControlName="email">
+      <mat-error *ngIf="userForm.get('email')?.hasError">L'e-mail est invalide</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input matInput type="password" formControlName="password">
+      <mat-error *ngIf="userForm.get('password')?.hasError">Le mot de passe doit contenir au moins 8 caractères</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" mat-dialog-close>Annuler</button>
+  <button mat-raised-button color="accent" [mat-dialog-close]="true" (click)="onSubmit()" cdkFocusInitial>Ajouter</button>
+</mat-dialog-actions>

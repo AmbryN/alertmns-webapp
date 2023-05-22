@@ -5,9 +5,10 @@ import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/App.state';
 import { receiveMessage } from '../state/messages/message.action';
-import { baseUrl } from './baseUrl';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { IncomingMessage } from '../models/IncomingMessage';
+import { environment } from '../../environments/environment';
+
 const messageSocketUrl: string = `ws://localhost:8080/alertmns-api-0.0.1-SNAPSHOT/chat`;
 
 @Injectable({
@@ -20,7 +21,7 @@ export class MessageService {
 
   getMessages(channelId: number): Observable<IncomingMessage[]> {
     return this.http.get<IncomingMessage[]>(
-      baseUrl + `/channels/${channelId}/messages`
+      environment.serverUrl + `/channels/${channelId}/messages`
     );
   }
 

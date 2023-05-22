@@ -3,14 +3,20 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../App.state';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
+  addUser,
+  addUserFailure,
+  addUserSuccess,
   deleteUser,
   deleteUserFailure,
   deleteUserSuccess,
   loadUsers,
   loadUsersFailure,
   loadUsersSuccess,
+  updateUser,
+  updateUserFailure,
+  updateUserSuccess,
 } from './user.action';
-import { catchError, delay, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { UserService } from '../../services/user.service';
 
 @Injectable()
@@ -28,14 +34,38 @@ export class UserEffects {
         this.userService.getUsers().pipe(
           map((users) => loadUsersSuccess({ users })),
           catchError((error) => {
-            let message;
-            if (error.status > 500) message = 'Erreur serveur';
-            else if (error.stauts == 403)
-              message =
-                "L'authentification a expiré : veuillez vous reconnecter";
-            else if (error.status > 400) message = error.error.error.message;
-            else message = 'Erreur de connexion';
+            let message = this.userService.handle(error);
             return of(loadUsersFailure({ error: message }));
+          })
+        )
+      )
+    )
+  );
+
+  addUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(addUser),
+      switchMap((action) =>
+        this.userService.addUser(action.user).pipe(
+          map((user) => addUserSuccess({ user })),
+          catchError((error) => {
+            let message = this.userService.handle(error);
+            return of(addUserFailure({ error: message }));
+          })
+        )
+      )
+    )
+  );
+
+  updateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateUser),
+      switchMap((action) =>
+        this.userService.updateUser(action.user).pipe(
+          map((user) => updateUserSuccess({ user })),
+          catchError((error) => {
+            let message = this.userService.handle(error);
+            return of(updateUserFailure({ error: message }));
           })
         )
       )
@@ -48,7 +78,10 @@ export class UserEffects {
       switchMap((action) =>
         this.userService.deleteUser(action.userId).pipe(
           map((_) => deleteUserSuccess({ userId: action.userId })),
-          catchError((error) => of(deleteUserFailure({ error })))
+          catchError((error) => {
+            let message = this.userService.handle(error);
+            return of(deleteUserFailure({ error: message }));
+          })
         )
       )
     )

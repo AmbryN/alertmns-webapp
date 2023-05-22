@@ -1,0 +1,10 @@
+<aside>
+    <div *ngIf="currentUser$ | async" id="channels">
+      <app-channel-badge *ngFor="let channel of channels$ | async" [channel]="channel"></app-channel-badge>
+    </div>
+    <div *ngIf="isAdmin$ | async" id="admin_settings">
+      <button mat-icon-button routerLink='admin'>
+        <mat-icon color="accent">settings</mat-icon>
+      </button>
+    </div>
+</aside>

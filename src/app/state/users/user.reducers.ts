@@ -1,11 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  updateUser,
+  addUserFailure,
+  addUserSuccess,
   deleteUser,
   deleteUserFailure,
   deleteUserSuccess,
   loadUsers,
   loadUsersFailure,
   loadUsersSuccess,
+  updateUserSuccess,
+  updateUserFailure,
 } from './user.action';
 import { User } from '../../models/User';
 
@@ -34,6 +39,34 @@ export const userReducer = createReducer(
     status: 'success',
   })),
   on(loadUsersFailure, (state, { error }) => ({
+    ...state,
+    error,
+    status: 'error',
+  })),
+  on(updateUser, (state) => ({
+    ...state,
+    status: 'loading',
+  })),
+  on(addUserSuccess, (state, { user }) => ({
+    ...state,
+    users: [...state.users, user],
+    status: 'success',
+  })),
+  on(addUserFailure, (state, { error }) => ({
+    ...state,
+    error,
+    status: 'error',
+  })),
+  on(updateUser, (state) => ({
+    ...state,
+    status: 'loading',
+  })),
+  on(updateUserSuccess, (state, { user }) => ({
+    ...state,
+    users: [...state.users.filter((item) => item.id != user.id), user],
+    status: 'success',
+  })),
+  on(updateUserFailure, (state, { error }) => ({
     ...state,
     error,
     status: 'error',

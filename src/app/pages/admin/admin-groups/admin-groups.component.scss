@@ -1,0 +1,16 @@
+main {
+  width: 82vw;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-neutral-light);
+}
+
+app-side-panel {
+  flex: 15;
+  max-width: 15vw;
+  background-color: var(--color-primary-lightest);
+}
+
+

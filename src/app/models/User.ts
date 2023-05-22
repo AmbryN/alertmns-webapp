@@ -5,8 +5,8 @@ export type User = {
   id?: number;
   email: string;
   password?: string;
-  lastname?: string;
-  firstname?: string;
+  lastname: string;
+  firstname: string;
   roles?: string[];
   channels?: Channel[];
 };

@@ -1,0 +1,8 @@
+<mat-list id="list">
+  <ng-container *ngFor="let item of list">
+    <mat-list-item [routerLink]="item.link" class="list-item" [class]="getColor()">
+      <mat-icon matListItemIcon color="accent">{{ item.icon }}</mat-icon>
+      <div matListItemTitle>{{ item.name }}</div>
+    </mat-list-item>
+  </ng-container>
+</mat-list>

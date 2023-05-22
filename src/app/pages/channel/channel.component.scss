@@ -64,17 +64,13 @@ app-side-panel {
   }
 }
 
-
-
-.button {
-  flex: 1;
-  border: none;
-  background-color: #FFFFFF;
-}
-
 mat-icon {
-  color: #ED6636;
   width: fit-content;
   height: fit-content;
   font-size: xx-large;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }

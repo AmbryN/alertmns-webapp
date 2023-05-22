@@ -1,0 +1,13 @@
+<main id="view">
+  <div id="title" *ngIf="selectedGroup$ | async as group">
+    <span>Groupe : {{ group.name }}</span>
+  </div>
+  <div id="members">
+    <ng-container *ngIf="members$ | async as members">
+      <button mat-raised-button color="accent" (click)="openDialog()">Ajouter des membres</button>
+      <div id="table">
+        <app-data-table (onDelete)="onDelete($event)" [items]="members" [columns]="columns" [hasDelete]="true"/>
+      </div>
+    </ng-container>
+  </div>
+</main>

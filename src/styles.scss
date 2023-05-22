@@ -60,61 +60,9 @@ $accent-palette: (
     )
 );
 
-$neutral-palette: (
-  900: #000000,
-  800: #030865,
-  700: #1e2578,
-  600: #2b3284,
-  500: #373e90,
-  400: #434a9c,
-  300: #4f56a9,
-  200: #6870c4,
-  100: #8289e0,
-  50:  #9ca4fd,
-  contrast: (
-    900: #000000,
-    800: #030865,
-    700: #1e2578,
-    600: #2b3284,
-    500: #373e90,
-    400: #434a9c,
-    300: #4f56a9,
-    200: #6870c4,
-    100: #8289e0,
-    50:  #9ca4fd,
-  )
-);
-
-$error-palette: (
-  900: #000000,
-  800: #410002,
-  700: #690005,
-  600: #7e0007,
-  500: #93000a,
-  400: #a80710,
-  300: #ba1a1a,
-  200: #de3730,
-  100: #ff5449,
-  50:  #ff897d,
-  contrast: (
-    900: #000000,
-    800: #410002,
-    700: #690005,
-    600: #7e0007,
-    500: #93000a,
-    400: #a80710,
-    300: #ba1a1a,
-    200: #de3730,
-    100: #ff5449,
-    50:  #ff897d,
-  )
-);
-
-$mns-app-primary: mat.define-palette($primary-palette, 500);
-$mns-app-accent:  mat.define-palette($accent-palette, 500);
-$mns-app-error: mat.define-palette($error-palette);
-
-$mns-app-neutral: mat.define-palette($neutral-palette);
+$mns-app-primary: mat.define-palette($primary-palette, 500, 200, 800, 50);
+$mns-app-accent:  mat.define-palette(mat.$orange-palette, 400, 200, 800, 400);
+$mns-app-error: mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $alert-mns-theme: mat.define-light-theme($mns-app-primary, $mns-app-accent, $mns-app-error);
@@ -130,13 +78,14 @@ $warn: map-get($alert-mns-theme, warn);
 
 
 :root {
+  --color-primary-lightest: #818296;
   --color-primary-light: #3E4160;
   --color-primary: #151B36;
   --color-primary-dark: #000011;
   --color-accent-light: #FF9763;
   --color-accent: #ED6636;
   --color-warn: #{mat-color($warn)};
-  --color-neutral: #818296;
+  --color-neutral: #CACACA;
   --color-neutral-light: #D9D9D9;
   --color-white: #FFFFFF;
   --color-on-neutral: #000000;

@@ -2,16 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/User';
 import { Observable, of } from 'rxjs';
-import {
-  ActivatedRoute,
-  ActivatedRouteSnapshot,
-  Router,
-} from '@angular/router';
+import { Router } from '@angular/router';
 import { TokenResponse } from '../models/TokenResponse';
-import { baseUrl } from './baseUrl';
 import { AppState } from '../state/App.state';
 import { Store } from '@ngrx/store';
 import { loadProfile } from '../state/login/login.action';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -24,11 +20,14 @@ export class LoginService {
   ) {}
   login(user: User): Observable<TokenResponse> {
     localStorage.clear();
-    return this.http.post<TokenResponse>(baseUrl + '/login', user);
+    return this.http.post<TokenResponse>(
+      environment.serverUrl + '/login',
+      user
+    );
   }
 
   getProfile(): Observable<User> {
-    return this.http.get<User>(baseUrl + '/users/profile');
+    return this.http.get<User>(environment.serverUrl + '/users/profile');
   }
 
   logout(): Observable<any> {

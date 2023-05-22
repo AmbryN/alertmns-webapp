@@ -9,6 +9,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AdminUsersComponent } from './pages/admin/admin-users/admin-users.component';
 import { AdminGroupsComponent } from './pages/admin/admin-groups/admin-groups.component';
+import { GroupViewComponent } from './pages/admin/admin-groups/group-view/group-view.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,12 @@ const routes: Routes = [
       {
         path: 'groups',
         component: AdminGroupsComponent,
+        children: [
+          {
+            path: ':id',
+            component: GroupViewComponent,
+          },
+        ],
       },
     ],
   },

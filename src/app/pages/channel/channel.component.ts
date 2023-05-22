@@ -10,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/User';
 import { delay, map, tap } from 'rxjs';
 import { selectCurrentUser } from '../../state/login/login.selectors';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-channel',
@@ -81,6 +82,10 @@ export class ChannelComponent {
         })
       );
     }
+  }
+
+  downloadUrl(format: 'CSV' | 'XML' | 'JSON'): string {
+    return environment.serverUrl + `/export/${this.channelId}?format=${format}`;
   }
 
   ngOnDestroy() {

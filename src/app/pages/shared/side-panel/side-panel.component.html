@@ -1,0 +1,5 @@
+<div id="panel" [class]="getColor()">
+  <div id="title">{{title}}</div>
+  <button mat-raised-button color="accent" *ngIf="hasAddButton" (click)="onClick()">Ajouter un groupe</button>
+  <app-list [list]="list" [color]="getListColor()"/>
+</div>

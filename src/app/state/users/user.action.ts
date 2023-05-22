@@ -13,6 +13,36 @@ export const loadUsersFailure = createAction(
   props<{ error: string }>()
 );
 
+export const addUser = createAction(
+  '[Admin Users] Add User',
+  props<{ user: User }>()
+);
+
+export const addUserSuccess = createAction(
+  '[Admin Users] Add User Success',
+  props<{ user: User }>()
+);
+
+export const addUserFailure = createAction(
+  '[Admin Users] Add User Failure',
+  props<{ error: string }>()
+);
+
+export const updateUser = createAction(
+  '[Admin Users] Udpdate User',
+  props<{ user: User }>()
+);
+
+export const updateUserSuccess = createAction(
+  '[Admin Users] Update User Success',
+  props<{ user: User }>()
+);
+
+export const updateUserFailure = createAction(
+  '[Admin Users] Update User Failure',
+  props<{ error: string }>()
+);
+
 export const deleteUser = createAction(
   '[Admin Users] Delete User',
   props<{ userId: number }>()
