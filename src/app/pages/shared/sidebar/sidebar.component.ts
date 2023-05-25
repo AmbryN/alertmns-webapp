@@ -23,7 +23,9 @@ export class SidebarComponent {
   isAdmin$: Observable<boolean> = this.currentUser$.pipe(
     map((user) => {
       if (user != null)
-        return user!.roles!.find((role) => role == 'ROLE_ADMIN') != undefined;
+        return (
+          user!.roles!.find((role) => role.name == 'ROLE_ADMIN') != undefined
+        );
       else return false;
     })
   );

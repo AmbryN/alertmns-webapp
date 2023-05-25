@@ -1,11 +1,13 @@
 <div id="channel" *ngIf="selectedChannel$ | async as channel">
   <ng-container *ngIf="members$ | async as members">
-    <app-side-panel title="Membres" [list]="members"/>
+    <app-side-panel title="Membres" [list]="members" />
   </ng-container>
 
   <div id="view">
     <div id="channel_name">
-      <span>Canal : <strong>{{channel.name}}</strong></span>
+      <span
+        >Canal : <strong>{{ channel.name }}</strong></span
+      >
       <button mat-icon-button class="button" [matMenuTriggerFor]="menu">
         <mat-icon color="accent">download</mat-icon>
       </button>
@@ -15,24 +17,30 @@
         <app-message [message]="message"></app-message>
       </ng-container>
     </div>
-    <form id="message_input" [formGroup]="messageForm" (ngSubmit)="addMessage()">
+    <form
+      id="message_input"
+      [formGroup]="messageForm"
+      (ngSubmit)="addMessage()"
+    >
       <button mat-icon-button class="button">
         <mat-icon color="accent">upload</mat-icon>
       </button>
 
-      <input type="text" id="message" formControlName="message">
+      <input type="text" id="message" formControlName="message" />
 
       <button mat-icon-button class="button">
         <mat-icon color="accent">send</mat-icon>
       </button>
     </form>
   </div>
-  <app-side-panel title="Fichier" [list]="[{name: 'Fichier 1', link:'', icon: 'picture_as_pdf'}]"></app-side-panel>
+  <app-side-panel
+    title="Fichier"
+    [list]="[{ name: 'Fichier 1', link: '', icon: 'picture_as_pdf' }]"
+  ></app-side-panel>
 
   <mat-menu #menu="matMenu">
-    <a [href]="downloadUrl('CSV')" target="_blank"><button mat-menu-item>CSV</button></a>
-    <a [href]="downloadUrl('JSON')" target="_blank"><button mat-menu-item>JSON</button></a>
-    <a [href]="downloadUrl('XML')" target="_blank"><button mat-menu-item>XML</button></a>
+    <button mat-menu-item (click)="download('CSV')">CSV</button>
+    <button mat-menu-item (click)="download('JSON')">JSON</button>
+    <button mat-menu-item (click)="download('XML')">XML</button>
   </mat-menu>
-
 </div>

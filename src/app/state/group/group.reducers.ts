@@ -17,7 +17,6 @@ import {
   removeUserFromGroupSuccess,
 } from './group.action';
 import { Group } from '../../models/Group';
-import { selectedGroup } from './group.selectors';
 
 export interface GroupState {
   groups: Group[];

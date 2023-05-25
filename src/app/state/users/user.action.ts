@@ -13,6 +13,21 @@ export const loadUsersFailure = createAction(
   props<{ error: string }>()
 );
 
+export const loadUser = createAction(
+  '[Update User] Load User',
+  props<{ userId: number }>()
+);
+
+export const loadUserSuccess = createAction(
+  '[Update User] Load User Success',
+  props<{ user: User }>()
+);
+
+export const loadUserFailure = createAction(
+  '[Update User] Load User Failure',
+  props<{ error: string }>()
+);
+
 export const addUser = createAction(
   '[Admin Users] Add User',
   props<{ user: User }>()

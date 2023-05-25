@@ -11,17 +11,22 @@ import {
   loadUsersSuccess,
   updateUserSuccess,
   updateUserFailure,
+  loadUser,
+  loadUserSuccess,
+  loadUserFailure,
 } from './user.action';
 import { User } from '../../models/User';
 
 export interface UserState {
   users: User[];
+  selectedUser: User | null;
   error: string;
   status: 'pending' | 'loading' | 'error' | 'success';
 }
 
 export const initialState: UserState = {
   users: [],
+  selectedUser: null,
   error: '',
   status: 'pending',
 };
@@ -39,6 +44,20 @@ export const userReducer = createReducer(
     status: 'success',
   })),
   on(loadUsersFailure, (state, { error }) => ({
+    ...state,
+    error,
+    status: 'error',
+  })),
+  on(loadUser, (state) => ({
+    ...state,
+    status: 'loading',
+  })),
+  on(loadUserSuccess, (state, { user }) => ({
+    ...state,
+    selectedUser: user,
+    status: 'success',
+  })),
+  on(loadUserFailure, (state, { error }) => ({
     ...state,
     error,
     status: 'error',

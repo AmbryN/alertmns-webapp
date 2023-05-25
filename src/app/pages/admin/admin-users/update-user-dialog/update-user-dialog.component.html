@@ -16,9 +16,19 @@
       <input matInput type="email" formControlName="email">
       <mat-error *ngIf="userForm.get('email')?.hasError">L'e-mail est invalide</mat-error>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Roles</mat-label>
+      <mat-select [formControl]="roles" multiple [compareWith]="compare" >
+        <ng-container *ngFor="let role of roles$ | async ">
+          <mat-option  [value]="role">{{role.name | role}}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button color="warn" mat-dialog-close>Annuler</button>
-  <button mat-raised-button color="accent" [mat-dialog-close]="true" (click)="onSubmit()" cdkFocusInitial>Modifier</button>
+  <button mat-raised-button color="accent" [mat-dialog-close]="true" (click)="onSubmit()" cdkFocusInitial>Modifier
+  </button>
 </mat-dialog-actions>

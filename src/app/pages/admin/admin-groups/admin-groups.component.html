@@ -1,11 +1,8 @@
-<main>
-  <ng-container *ngIf="groups$ | async as groups">
-    <app-side-panel title="Groupes" [list]="groups" color="lightest" [hasAddButton]="true" (buttonClicked)="openDialog()"/>
-  </ng-container>
+<ng-container *ngIf="groups$ | async as groups">
+  <app-side-panel title="Groupes" [list]="groups" color="lightest" [hasAddButton]="true"
+                  (buttonClicked)="openDialog()"/>
+</ng-container>
 
+<div class="router">
   <router-outlet></router-outlet>
-
-  <ng-template #loading>
-    <mat-spinner></mat-spinner>
-  </ng-template>
-</main>
+</div>

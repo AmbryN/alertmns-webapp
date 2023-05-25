@@ -1,19 +1,19 @@
-<main>
-  <div id="title">
-    <span>Membres</span>
-  </div>
-  <div id="users">
-    <ng-container *ngIf="userLoadingStatus$ | async as status">
-      <div id="table" *ngIf="status != 'loading' else loading">
-        <button mat-raised-button color="accent" (click)="openDialog()">Ajouter un utilisateur</button>
-        <ng-container *ngIf="users$ | async as users">
-          <app-data-table [items]="users" [columns]="columns" (onUpdate)="onUpdate($event)" (onDelete)="onDelete($event)"/>
-        </ng-container>
-      </div>
-    </ng-container>
-  </div>
+<div class="title content-card">
+  <span>Membres</span>
+</div>
+<div class="users content-card">
+  <ng-container *ngIf="userLoadingStatus$ | async as status">
+    <div *ngIf="status != 'loading' else loading">
+      <button mat-raised-button color="accent" (click)="openDialog()">Ajouter un utilisateur</button>
+      <ng-container *ngIf="users$ | async as users">
+        <app-data-table [items]="users" [columns]="columns" [hasUpdate]="true" [hasDelete]="true"
+                        (onUpdate)="onUpdate($event)" (onDelete)="onDelete($event)"/>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
 
-  <ng-template #loading>
-    <mat-spinner></mat-spinner>
-  </ng-template>
-</main>
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>
+

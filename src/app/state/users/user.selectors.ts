@@ -1,7 +1,7 @@
 import { AppState } from '../App.state';
 import { UserState } from './user.reducers';
 import { createSelector } from '@ngrx/store';
-import { createEffect } from '@ngrx/effects';
+import { User } from '../../models/User';
 
 export const selectUsers = (state: AppState) => state.users;
 
@@ -18,4 +18,9 @@ export const userStatus = createSelector(
 export const userError = createSelector(
   selectUsers,
   (state: UserState) => state.error
+);
+
+export const selectSelectedUser = createSelector(
+  selectUsers,
+  (state: UserState) => state.selectedUser
 );

@@ -7,6 +7,6 @@ export type User = {
   password?: string;
   lastname: string;
   firstname: string;
-  roles?: string[];
+  roles?: Role[];
   channels?: Channel[];
 };

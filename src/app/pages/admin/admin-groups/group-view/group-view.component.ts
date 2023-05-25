@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 import {
   loadGroup,
   removeUserFromGroup,
-} from '../../../../state/groups/group.action';
+} from '../../../../state/group/group.action';
 import { ActivatedRoute } from '@angular/router';
-import { selectedGroup } from '../../../../state/groups/group.selectors';
+import { selectedGroup } from '../../../../state/group/group.selectors';
 import { map } from 'rxjs';
 import { User } from '../../../../models/User';
 import { MatDialog } from '@angular/material/dialog';

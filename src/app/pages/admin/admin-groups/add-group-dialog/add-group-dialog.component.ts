@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppState } from '../../../../state/App.state';
 import { Store } from '@ngrx/store';
-import { addGroup } from '../../../../state/groups/group.action';
+import { addGroup } from '../../../../state/group/group.action';
 
 @Component({
   selector: 'app-add-group-dialog',

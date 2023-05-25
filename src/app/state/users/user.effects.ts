@@ -9,9 +9,12 @@ import {
   deleteUser,
   deleteUserFailure,
   deleteUserSuccess,
+  loadUser,
+  loadUserFailure,
   loadUsers,
   loadUsersFailure,
   loadUsersSuccess,
+  loadUserSuccess,
   updateUser,
   updateUserFailure,
   updateUserSuccess,
@@ -36,6 +39,21 @@ export class UserEffects {
           catchError((error) => {
             let message = this.userService.handle(error);
             return of(loadUsersFailure({ error: message }));
+          })
+        )
+      )
+    )
+  );
+
+  loadUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadUser),
+      switchMap((action) =>
+        this.userService.getUser(action.userId).pipe(
+          map((user) => loadUserSuccess({ user })),
+          catchError((error) => {
+            let message = this.userService.handle(error);
+            return of(loadUserFailure({ error: message }));
           })
         )
       )

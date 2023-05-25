@@ -14,6 +14,10 @@ export class UserService {
     return this.http.get<User[]>(environment.serverUrl + '/users');
   }
 
+  getUser(userId: number): Observable<User> {
+    return this.http.get<User>(environment.serverUrl + '/users/' + userId);
+  }
+
   addUser(user: User): Observable<User> {
     return this.http.post<User>(environment.serverUrl + '/users', user);
   }

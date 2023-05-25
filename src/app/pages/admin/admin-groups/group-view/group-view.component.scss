@@ -1,34 +1,31 @@
-#view {
-  width: 68vw;
-  height: 100%;
+:host {
   box-sizing: border-box;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 0.5em;
 }
 
-#title {
+.title {
   flex: 1;
-  font-weight: bold;
   text-align: center;
-  vertical-align: center;
-  background-color: var(--color-white);
   border-radius: 7px;
   margin-bottom: 0.5em;
 
   span {
     position: relative;
     top: 30%;
+    font-weight: bold;
   };
 }
 
-#members {
+.members {
   flex: 20;
-  background-color: var(--color-white);
   padding: 2em;
-  border-radius: 7px;
+
+  mat-spinner {
+    margin: auto;
+  }
 }
 
-mat-spinner {
-  margin: auto;
-}
+

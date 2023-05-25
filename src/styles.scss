@@ -91,4 +91,13 @@ $warn: map-get($alert-mns-theme, warn);
   --color-on-neutral: #000000;
 }
 
-//"./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+// GLOBAL STYLES
+
+.content-card {
+  border-radius: 7px;
+  background-color: var(--color-white)
+}
+
+.cdk-overlay-pane {
+  min-width: 20vw;
+}

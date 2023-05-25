@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/App.state';
-import { loadGroups } from '../../../state/groups/group.action';
-import { selectAllGroups } from '../../../state/groups/group.selectors';
+import { loadGroups } from '../../../state/group/group.action';
+import { selectAllGroups } from '../../../state/group/group.selectors';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddGroupDialogComponent } from './add-group-dialog/add-group-dialog.component';
 
 @Component({
-  selector: 'app-admin-groups',
+  selector: 'app-admin-role',
   templateUrl: './admin-groups.component.html',
   styleUrls: ['./admin-groups.component.scss'],
 })

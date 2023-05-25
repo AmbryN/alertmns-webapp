@@ -5,8 +5,7 @@ import { selectAllUsers } from '../../../../state/users/user.selectors';
 import { loadUsers } from '../../../../state/users/user.action';
 import { User } from '../../../../models/User';
 import { Column } from '../../../shared/data-table/data-table.component';
-import { addUserToGroup } from '../../../../state/groups/group.action';
-import { ActivatedRoute } from '@angular/router';
+import { addUserToGroup } from '../../../../state/group/group.action';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({

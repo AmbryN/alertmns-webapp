@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadMessages, sendMessage } from '../../state/messages/message.action';
 import { selectAllMessages } from '../../state/messages/message.selectors';
@@ -11,6 +11,8 @@ import { User } from '../../models/User';
 import { delay, map, tap } from 'rxjs';
 import { selectCurrentUser } from '../../state/login/login.selectors';
 import { environment } from '../../../environments/environment';
+import { FileService } from '../../services/file.service';
+import { FileFormat } from 'src/app/models/FileFormat';
 
 @Component({
   selector: 'app-channel',
@@ -52,7 +54,11 @@ export class ChannelComponent {
   private channelId: number = Number(this.route.snapshot.paramMap.get('id'));
   private currentUser: User | null = null;
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+  constructor(
+    private store: Store<AppState>,
+    private route: ActivatedRoute,
+    private fileService: FileService
+  ) {
     this.route.params.subscribe((params) => {
       this.channelId = params['id'];
       if (this.channelId) {
@@ -84,8 +90,8 @@ export class ChannelComponent {
     }
   }
 
-  downloadUrl(format: 'CSV' | 'XML' | 'JSON'): string {
-    return environment.serverUrl + `/export/${this.channelId}?format=${format}`;
+  download(format: FileFormat): void {
+    this.fileService.downloadFile(this.channelId, format).subscribe();
   }
 
   ngOnDestroy() {

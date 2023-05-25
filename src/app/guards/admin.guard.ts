@@ -32,7 +32,7 @@ export class AdminGuard implements CanActivate {
       map((user) => {
         if (
           user != null &&
-          user.roles!.find((role) => role == 'ROLE_ADMIN') != undefined
+          user.roles!.find((role) => role.name == 'ROLE_ADMIN') != undefined
         )
           return true;
         else return this.router.parseUrl('/');

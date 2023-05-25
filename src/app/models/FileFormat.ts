@@ -1,0 +1,1 @@
+export type FileFormat = 'CSV' | 'JSON' | 'XML'

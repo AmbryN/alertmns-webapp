@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/App.state';
 import { User } from '../../../models/User';
 import { map, Observable, startWith } from 'rxjs';
-import { addUserToGroup } from '../../../state/groups/group.action';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({

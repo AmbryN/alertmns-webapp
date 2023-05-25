@@ -11,7 +11,6 @@ mat-list-item {
   margin-top: 0.2em;
   padding: 0.5em 1em;
   border-radius: 7px;
-  //background-color: var(--color-neutral);
 
   div {
     font-weight: bold;
@@ -24,4 +23,10 @@ mat-list-item {
 }
 .color-light {
   background-color: var(--color-neutral-light);
+}
+
+@media (max-width: 1000px) {
+  mat-list {
+    display: flex;
+  }
 }

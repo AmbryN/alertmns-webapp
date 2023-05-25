@@ -44,8 +44,7 @@ import { UserEffects } from './state/users/user.effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListComponent } from './pages/shared/list/list.component';
-import { groupReducer } from './state/groups/group.reducers';
-import { GroupEffects } from './state/groups/group.effects';
+import { roleReducer } from './state/role/role.reducers';
 import { DataTableComponent } from './pages/shared/data-table/data-table.component';
 import { GroupViewComponent } from './pages/admin/admin-groups/group-view/group-view.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -55,6 +54,12 @@ import { AddMemberDialogComponent } from './pages/admin/admin-groups/add-member-
 import { SearchBarComponent } from './pages/shared/search-bar/search-bar.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AddGroupDialogComponent } from './pages/admin/admin-groups/add-group-dialog/add-group-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
+import { groupReducer } from './state/group/group.reducers';
+import { GroupEffects } from './state/group/group.effects';
+import { RoleEffects } from './state/role/role.effects';
+import { MatChipsModule } from '@angular/material/chips';
+import { RolePipe } from './pipes/role.pipe';
 
 @NgModule({
   declarations: [
@@ -80,6 +85,7 @@ import { AddGroupDialogComponent } from './pages/admin/admin-groups/add-group-di
     AddMemberDialogComponent,
     SearchBarComponent,
     AddGroupDialogComponent,
+    RolePipe,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +97,7 @@ import { AddGroupDialogComponent } from './pages/admin/admin-groups/add-group-di
         login: loginReducer,
         users: userReducer,
         groups: groupReducer,
+        roles: roleReducer,
       },
       {}
     ),
@@ -102,6 +109,7 @@ import { AddGroupDialogComponent } from './pages/admin/admin-groups/add-group-di
       LoginEffects,
       UserEffects,
       GroupEffects,
+      RoleEffects,
     ]),
     BrowserAnimationsModule,
     MatInputModule,
@@ -120,6 +128,8 @@ import { AddGroupDialogComponent } from './pages/admin/admin-groups/add-group-di
     MatPaginatorModule,
     MatSortModule,
     MatAutocompleteModule,
+    MatSelectModule,
+    MatChipsModule,
   ],
   providers: [
     {
