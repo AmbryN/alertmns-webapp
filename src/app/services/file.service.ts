@@ -14,7 +14,6 @@ export class FileService {
     channelId: number,
     format: FileFormat
   ): Observable<HttpResponse<Blob>> {
-
     return this.http
       .get<HttpResponse<Blob>>(
         environment.serverUrl + `/export/${channelId}?format=${format}`,
@@ -29,17 +28,15 @@ export class FileService {
             'content-disposition'
           );
           const filename = contentDisposition.substring(21);
-          const downloadLink = document.createElement('a');
-
           const file = new File([response.body], filename, {
             type: response.body.type,
           });
-          const fileURL = URL.createObjectURL(file);
 
-          downloadLink.href = fileURL;
+          const downloadLink = document.createElement('a');
+          downloadLink.href = URL.createObjectURL(file);
           downloadLink.download = filename;
           downloadLink.click();
-    
+
           return response;
         })
       );
