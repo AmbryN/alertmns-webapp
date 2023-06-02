@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  serverUrl: 'http://test/',
+  serverUrl: 'http://localhost/api',
+  socketUrl: 'ws://localhost/api/chat',
 };
