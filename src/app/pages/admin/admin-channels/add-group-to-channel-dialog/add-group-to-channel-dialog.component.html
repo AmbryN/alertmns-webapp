@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Ajouter des groupes</h2>
+<mat-dialog-content>
+  <ng-container *ngIf="groups$ | async as groups">
+    <app-search-bar
+      placeholder="Groupe"
+      (onSelectedOption)="updateSelectedItems($event)"
+      [options]="groups"
+    />
+  </ng-container>
+
+  <app-data-table
+    [items]="selectedItems"
+    [columns]="columns"
+    [hasDelete]="true"
+    (onDelete)="removeGroup($event)"
+  />
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" mat-dialog-close>Fermer</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="true"
+    (click)="addGroups(selectedItems)"
+    cdkFocusInitial
+  >
+    Ajouter
+  </button>
+</mat-dialog-actions>

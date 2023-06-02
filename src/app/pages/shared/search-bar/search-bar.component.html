@@ -1,23 +1,22 @@
-<!--<form [formGroup]="form">-->
-<!--  <mat-form-field>-->
-<!--    <mat-label>Rechercher un membre</mat-label>-->
-<!--    <input matInput type="text" formControlName="query" (keyup)="onChange($event)">-->
-<!--  </mat-form-field>-->
-<!--</form>-->
-
 <form>
   <mat-form-field>
-    <mat-label>Membre</mat-label>
-    <input type="text"
-           placeholder="Membre"
-           aria-label="Membre"
-           matInput
-           [formControl]="query"
-           [matAutocomplete]="auto"
-    >
+    <mat-label>{{ placeholder }}</mat-label>
+    <input
+      type="text"
+      placeholder="{{ placeholder }}"
+      aria-label="Membre"
+      matInput
+      [formControl]="query"
+      [matAutocomplete]="auto"
+    />
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="select($event)">
-      <mat-option *ngFor="let option of filteredOptions$ | async"  [value]="option.id">
-        {{option.lastname}} {{option.firstname}} - {{option.email}}
+      <mat-option
+        *ngFor="let option of filteredOptions$ | async"
+        [value]="option.id"
+      >
+        <span *ngFor="let property of getProperties()"
+          >{{ option[property] }}
+        </span>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

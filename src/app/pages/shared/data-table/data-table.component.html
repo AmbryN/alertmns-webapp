@@ -30,7 +30,7 @@
                  aria-label="Choix de la page">
   </mat-paginator>
 </div>
-<mat-menu #menu="matMenu">
+<mat-menu #menu="matMenu" id="menu">
   <ng-template matMenuContent let-itemId="id">
     <button mat-menu-item *ngIf="hasUpdate" (click)="update(itemId)">
       <mat-icon>settings</mat-icon>

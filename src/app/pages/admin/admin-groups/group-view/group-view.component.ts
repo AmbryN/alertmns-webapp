@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppState } from '../../../../state/App.state';
 import { Store } from '@ngrx/store';
 import {
+  addUserToGroup,
   loadGroup,
   removeUserFromGroup,
 } from '../../../../state/group/group.action';
@@ -10,7 +11,7 @@ import { selectedGroup } from '../../../../state/group/group.selectors';
 import { map } from 'rxjs';
 import { User } from '../../../../models/User';
 import { MatDialog } from '@angular/material/dialog';
-import { AddMemberDialogComponent } from '../add-member-dialog/add-member-dialog.component';
+import { AddMemberDialogComponent } from '../../../shared/add-member-dialog/add-member-dialog.component';
 
 @Component({
   selector: 'app-group-view',
@@ -61,6 +62,6 @@ export class GroupViewComponent {
   }
 
   openDialog(): void {
-    this.dialog.open(AddMemberDialogComponent, { data: this.groupId });
+    this.dialog.open(AddMemberDialogComponent, { data: {containerId: this.groupId, dispatcher: addUserToGroup }});
   }
 }

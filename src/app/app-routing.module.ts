@@ -10,6 +10,8 @@ import { AdminGuard } from './guards/admin.guard';
 import { AdminUsersComponent } from './pages/admin/admin-users/admin-users.component';
 import { AdminGroupsComponent } from './pages/admin/admin-groups/admin-groups.component';
 import { GroupViewComponent } from './pages/admin/admin-groups/group-view/group-view.component';
+import { AdminChannelsComponent } from './pages/admin/admin-channels/admin-channels.component';
+import { ChannelViewComponent } from './pages/admin/admin-channels/admin-channels/channel-view/channel-view.component';
 
 const routes: Routes = [
   {
@@ -43,6 +45,16 @@ const routes: Routes = [
           {
             path: ':id',
             component: GroupViewComponent,
+          },
+        ],
+      },
+      {
+        path: 'channels',
+        component: AdminChannelsComponent,
+        children: [
+          {
+            path: ':id',
+            component: ChannelViewComponent,
           },
         ],
       },

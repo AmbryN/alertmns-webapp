@@ -12,11 +12,12 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent {
-  @Input() options: User[] = [];
-  @Output() onSelectedOption = new EventEmitter<User>();
-  selectedUser: User | null = null;
+  @Input() options: any[] = [];
+  @Input() placeholder: string = "Placeholder"
+  @Output() onSelectedOption = new EventEmitter<any>();
+  selectedItem: any | null = null;
   query = new FormControl('');
-  filteredOptions$: Observable<User[]> = this.query.valueChanges.pipe(
+  filteredOptions$: Observable<any[]> = this.query.valueChanges.pipe(
     startWith(''),
     map((value) => this.filter(value || ''))
   );
@@ -25,21 +26,31 @@ export class SearchBarComponent {
 
   filter(value: string) {
     return this.options.filter((option) => {
-      return (
-        option.lastname.includes(value) ||
-        option.firstname.includes(value) ||
-        option.email.includes(value)
-      );
+      let isMatch = false;
+      for (let property in option) {
+        if (typeof option[property] == 'string' && option[property].includes(value)) {
+          isMatch = true;
+        }
+      }
+       return isMatch;
     });
   }
 
   select($event: MatAutocompleteSelectedEvent) {
-    const user = this.options.find((user) => user.id == $event.option.value);
-    if (user) {
-      this.selectedUser = user;
-      this.onSelectedOption.emit(this.selectedUser);
+    const item = this.options.find((item) => item.id == $event.option.value);
+    if (item) {
+      this.selectedItem = item;
+      this.onSelectedOption.emit(this.selectedItem);
     }
 
     this.query.setValue('');
+  }
+
+  getProperties() {
+    const properties = [];
+    for (let property in this.options[0]) {
+      properties.push(property)
+    }
+    return properties;
   }
 }

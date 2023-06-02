@@ -1,5 +1,5 @@
 <ng-container *ngIf="groups$ | async as groups">
-  <app-side-panel title="Groupes" [list]="groups" color="lightest" [hasAddButton]="true"
+  <app-side-panel title="Groupes" [list]="groups" color="lightest" [hasAddButton]="true" buttonText="Ajouter un groupe"
                   (buttonClicked)="openDialog()"/>
 </ng-container>
 

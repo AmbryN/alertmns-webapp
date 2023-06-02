@@ -1,0 +1,33 @@
+<div class="title content-card" *ngIf="selectedChannel$ | async as channel">
+  <span>Channel : {{ channel.name }}</span>
+</div>
+<div class="members content-card">
+  <ng-container *ngIf="members$ | async as members">
+    <button mat-raised-button color="accent" (click)="openMembersDialog()">
+      Ajouter des membres
+    </button>
+    <div class="table">
+      <app-data-table
+        (onDelete)="onDeleteMember($event)"
+        [items]="members"
+        [columns]="columns"
+        [hasDelete]="true"
+      />
+    </div>
+  </ng-container>
+</div>
+<div class="groups content-card">
+  <ng-container *ngIf="groups$ | async as groups">
+    <button mat-raised-button color="accent" (click)="openGroupsDialog()">
+      Ajouter des groupes
+    </button>
+    <div class="table">
+      <app-data-table
+        (onDelete)="onDeleteGroup($event)"
+        [items]="groups"
+        [columns]="columns_group"
+        [hasDelete]="true"
+      />
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,8 @@
+<ng-container *ngIf="channels$ | async as channels">
+  <app-side-panel title="Canaux" [list]="channels" color="lightest" [hasAddButton]="true" buttonText="Ajouter un canal"
+                  (buttonClicked)="openDialog()"/>
+</ng-container>
+
+<div class="router">
+  <router-outlet></router-outlet>
+</div>

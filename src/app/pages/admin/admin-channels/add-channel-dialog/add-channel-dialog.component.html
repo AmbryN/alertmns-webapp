@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Créer un canal</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Nom du canal</mat-label>
+      <input matInput type="text" formControlName="name" />
+      <mat-error *ngIf="form.get('name')?.hasError"
+        >Le nom est obligatoire</mat-error
+      >
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" mat-dialog-close>Fermer</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="onAdd()"
+  >
+    Ajouter
+  </button>
+</mat-dialog-actions>

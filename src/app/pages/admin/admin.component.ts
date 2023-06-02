@@ -19,7 +19,7 @@ export class AdminComponent {
     },
     {
       name: 'Channels',
-      link: '',
+      link: 'channels',
       icon: 'forum',
     },
     {

@@ -50,7 +50,7 @@ import { GroupViewComponent } from './pages/admin/admin-groups/group-view/group-
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { UpdateUserDialogComponent } from './pages/admin/admin-users/update-user-dialog/update-user-dialog.component';
-import { AddMemberDialogComponent } from './pages/admin/admin-groups/add-member-dialog/add-member-dialog.component';
+import { AddMemberDialogComponent } from './pages/shared/add-member-dialog/add-member-dialog.component';
 import { SearchBarComponent } from './pages/shared/search-bar/search-bar.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AddGroupDialogComponent } from './pages/admin/admin-groups/add-group-dialog/add-group-dialog.component';
@@ -60,6 +60,10 @@ import { GroupEffects } from './state/group/group.effects';
 import { RoleEffects } from './state/role/role.effects';
 import { MatChipsModule } from '@angular/material/chips';
 import { RolePipe } from './pipes/role.pipe';
+import { AdminChannelsComponent } from './pages/admin/admin-channels/admin-channels.component';
+import { ChannelViewComponent } from './pages/admin/admin-channels/admin-channels/channel-view/channel-view.component';
+import { AddGroupToChannelDialogComponent } from './pages/admin/admin-channels/add-group-to-channel-dialog/add-group-to-channel-dialog.component';
+import { AddChannelDialogComponent } from './pages/admin/admin-channels/add-channel-dialog/add-channel-dialog.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +90,10 @@ import { RolePipe } from './pipes/role.pipe';
     SearchBarComponent,
     AddGroupDialogComponent,
     RolePipe,
+    AdminChannelsComponent,
+    ChannelViewComponent,
+    AddGroupToChannelDialogComponent,
+    AddChannelDialogComponent,
   ],
   imports: [
     BrowserModule,

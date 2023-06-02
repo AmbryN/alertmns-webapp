@@ -11,6 +11,7 @@ export class SidePanelComponent {
   @Input() list: ListItem[] = [];
   @Input() color: 'light' | 'lightest' | undefined;
   @Input() hasAddButton: boolean = false;
+  @Input() buttonText: string = 'Ajouter';
 
   @Output() buttonClicked: EventEmitter<MouseEvent> =
     new EventEmitter<MouseEvent>();
