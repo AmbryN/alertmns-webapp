@@ -1,5 +1,6 @@
 <div class="title content-card" *ngIf="selectedChannel$ | async as channel">
   <span>Channel : {{ channel.name }}</span>
+  <button mat-icon-button (click)="openRenameDialog()"><mat-icon>settings</mat-icon></button>
 </div>
 <div class="members content-card">
   <ng-container *ngIf="members$ | async as members">

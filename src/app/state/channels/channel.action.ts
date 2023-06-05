@@ -47,60 +47,75 @@ export const createChannelFailure = createAction(
 
 export const addUsersToChannel = createAction(
   '[Admin Channel] Add User To Channel',
-  props<{ channelId: number, users: User[]}>()
-)
+  props<{ channelId: number; users: User[] }>()
+);
 
 export const addUsersToChannelSuccess = createAction(
   '[Admin Channel] Add User To Channel Success',
-  props<{ channel: Channel}>()
-)
+  props<{ channel: Channel }>()
+);
 
 export const addUsersToChannelFailure = createAction(
   '[Admin Channel] Add User To Channel Failure',
   props<{ error: string }>()
-)
+);
 
 export const addGroupsToChannel = createAction(
   '[Admin Channel] Add Group To Channel',
-  props<{ channelId: number, groups: Group[]}>()
-)
+  props<{ channelId: number; groups: Group[] }>()
+);
 
 export const addGroupToChannelSuccess = createAction(
   '[Admin Channel] Add Group To Channel Success',
-  props<{ channel: Channel}>()
-)
+  props<{ channel: Channel }>()
+);
 
 export const addGroupToChannelFailure = createAction(
   '[Admin Channel] Add Group To Channel Failure',
   props<{ error: string }>()
-)
+);
 
 export const removeUserFromChannel = createAction(
   '[Admin Channel] Remove User From Channel',
-  props<{ channelId: number, userId: number}>()
-)
+  props<{ channelId: number; userId: number }>()
+);
 
 export const removeUserFromChannelSuccess = createAction(
   '[Admin Channel] Remove User From Channel Success',
-  props<{ channel: Channel}>()
-)
+  props<{ channel: Channel }>()
+);
 
 export const removeUserFromChannelFailure = createAction(
   '[Admin Channel] Remove User From Channel Failure',
   props<{ error: string }>()
-)
+);
 
 export const removeGroupFromChannel = createAction(
   '[Admin Channel] Remove Group From Channel',
-  props<{ channelId: number, groupId: number}>()
-)
+  props<{ channelId: number; groupId: number }>()
+);
 
 export const removeGroupFromChannelSuccess = createAction(
   '[Admin Channel] Remove Group From Channel Success',
-  props<{ channel: Channel}>()
-)
+  props<{ channel: Channel }>()
+);
 
 export const removeGroupFromChannelFailure = createAction(
   '[Admin Channel] Remove Group From Channel Failure',
   props<{ error: string }>()
-)
+);
+
+export const updateChannel = createAction(
+  '[Admin Channel] Update Channel',
+  props<{ channel: Channel }>()
+);
+
+export const updateChannelSuccess = createAction(
+  '[Admin Channel] Update Channel Success',
+  props<{ channel: Channel }>()
+);
+
+export const updateChannelFailure = createAction(
+  '[Admin Channel] Update Channel Failure',
+  props<{ error: string }>()
+);

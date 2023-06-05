@@ -52,4 +52,8 @@ export class ChannelService {
       environment.serverUrl + '/channels/' + channelId + '/groups/' + groupId
     );
   }
+
+  updateChannel(channel: Channel): Observable<Channel> {
+    return this.http.put<Channel>(environment.serverUrl + '/channels', channel);
+  }
 }

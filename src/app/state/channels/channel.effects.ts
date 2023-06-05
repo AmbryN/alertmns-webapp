@@ -23,8 +23,11 @@ import {
   removeUserFromChannel,
   removeUserFromChannelFailure,
   removeUserFromChannelSuccess,
+  updateChannel,
+  updateChannelFailure,
+  updateChannelSuccess,
 } from './channel.action';
-import { catchError, from, map, of, switchMap } from 'rxjs';
+import { catchError, from, map, of, switchMap, tap } from 'rxjs';
 import { ChannelService } from '../../services/channel/channel.service';
 
 @Injectable()
@@ -122,6 +125,18 @@ export class ChannelEffects {
                 of(removeGroupFromChannelFailure({ error }))
               )
             )
+        )
+      )
+    )
+  );
+
+  updateChannel$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateChannel),
+      switchMap((action) =>
+        this.channelService.updateChannel(action.channel).pipe(
+          map((channel) => updateChannelSuccess({ channel })),
+          catchError((error) => of(updateChannelFailure({ error })))
         )
       )
     )

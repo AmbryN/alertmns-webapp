@@ -1,20 +1,24 @@
 import { Component } from '@angular/core';
 import { selectedChannel } from '../../../../../state/channels/channel.selectors';
-import { selectedGroup } from '../../../../../state/group/group.selectors';
-import { map, of } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../state/App.state';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  loadGroup,
-  removeUserFromGroup,
-} from '../../../../../state/group/group.action';
 import { AddMemberDialogComponent } from '../../../../shared/add-member-dialog/add-member-dialog.component';
 import { User } from '../../../../../models/User';
-import { addGroupsToChannel, addUsersToChannel, loadChannel, removeGroupFromChannel, removeUserFromChannel } from '../../../../../state/channels/channel.action';
+import {
+  addGroupsToChannel,
+  addUsersToChannel,
+  loadChannel,
+  removeGroupFromChannel,
+  removeUserFromChannel,
+  updateChannel,
+} from '../../../../../state/channels/channel.action';
 import { Group } from '../../../../../models/Group';
 import { AddGroupToChannelDialogComponent } from '../../add-group-to-channel-dialog/add-group-to-channel-dialog.component';
+import { RenameChannelDialogComponent } from './rename-channel-dialog/rename-channel-dialog.component';
+import { Channel } from '../../../../../models/Channel';
 
 @Component({
   selector: 'app-channel-view',
@@ -26,6 +30,9 @@ export class ChannelViewComponent {
   selectedChannel$ = this.store.select(selectedChannel);
   members$ = this.selectedChannel$.pipe(map((channel) => channel.members));
   groups$ = this.selectedChannel$.pipe(map((channel) => channel.groups));
+
+  sub: Subscription;
+  selectedChannel: Channel | null = null;
 
   columns = [
     {
@@ -77,6 +84,10 @@ export class ChannelViewComponent {
       this.channelId = Number(params.get('id'));
       this.store.dispatch(loadChannel({ channelId: this.channelId }));
     });
+
+    this.sub = this.selectedChannel$.subscribe((channel) => {
+      this.selectedChannel = channel;
+    });
   }
 
   onDeleteMember(userId: number): void {
@@ -86,14 +97,26 @@ export class ChannelViewComponent {
   }
 
   onDeleteGroup(groupId: number): void {
-    this.store.dispatch(removeGroupFromChannel({ channelId: this.channelId, groupId }));
+    this.store.dispatch(
+      removeGroupFromChannel({ channelId: this.channelId, groupId })
+    );
   }
 
   openMembersDialog(): void {
-    this.dialog.open(AddMemberDialogComponent, { data: {containerId: this.channelId, dispatcher: addUsersToChannel} });
+    this.dialog.open(AddMemberDialogComponent, {
+      data: { containerId: this.channelId, dispatcher: addUsersToChannel },
+    });
   }
 
   openGroupsDialog(): void {
-    this.dialog.open(AddGroupToChannelDialogComponent, { data: {containerId: this.channelId, dispatcher: addGroupsToChannel} });
+    this.dialog.open(AddGroupToChannelDialogComponent, {
+      data: { containerId: this.channelId, dispatcher: addGroupsToChannel },
+    });
+  }
+
+  openRenameDialog(): void {
+    this.dialog.open(RenameChannelDialogComponent, {
+      data: { channel: this.selectedChannel!, dispatcher: updateChannel },
+    });
   }
 }

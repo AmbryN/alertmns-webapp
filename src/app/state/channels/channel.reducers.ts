@@ -21,6 +21,9 @@ import {
   removeUserFromChannel,
   removeUserFromChannelFailure,
   removeUserFromChannelSuccess,
+  updateChannel,
+  updateChannelFailure,
+  updateChannelSuccess,
 } from './channel.action';
 
 export interface ChannelState {
@@ -136,6 +139,21 @@ export const channelReducer = createReducer(
     error: '',
   })),
   on(removeGroupFromChannelFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    status: 'error',
+  })),
+  on(updateChannel, (state, { channel }) => ({
+    ...state,
+    status: 'loading',
+  })),
+  on(updateChannelSuccess, (state, { channel }) => ({
+    ...state,
+    selectedChannel: channel,
+    status: 'success',
+    error: '',
+  })),
+  on(updateChannelFailure, (state, { error }) => ({
     ...state,
     error: error,
     status: 'error',

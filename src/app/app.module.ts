@@ -66,6 +66,7 @@ import { AddGroupToChannelDialogComponent } from './pages/admin/admin-channels/a
 import { AddChannelDialogComponent } from './pages/admin/admin-channels/add-channel-dialog/add-channel-dialog.component';
 import { notificationReducer } from './state/notifications/notification.reducers';
 import { NotificationEffects } from './state/notifications/notification.effects';
+import { RenameChannelDialogComponent } from './pages/admin/admin-channels/admin-channels/channel-view/rename-channel-dialog/rename-channel-dialog.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { NotificationEffects } from './state/notifications/notification.effects'
     ChannelViewComponent,
     AddGroupToChannelDialogComponent,
     AddChannelDialogComponent,
+    RenameChannelDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,7 +110,7 @@ import { NotificationEffects } from './state/notifications/notification.effects'
         users: userReducer,
         groups: groupReducer,
         roles: roleReducer,
-        notifications: notificationReducer
+        notifications: notificationReducer,
       },
       {}
     ),
@@ -121,7 +123,7 @@ import { NotificationEffects } from './state/notifications/notification.effects'
       UserEffects,
       GroupEffects,
       RoleEffects,
-      NotificationEffects
+      NotificationEffects,
     ]),
     BrowserAnimationsModule,
     MatInputModule,
@@ -152,4 +154,4 @@ import { NotificationEffects } from './state/notifications/notification.effects'
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

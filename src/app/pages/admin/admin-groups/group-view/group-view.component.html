@@ -1,5 +1,6 @@
 <div class="title content-card" *ngIf="selectedGroup$ | async as group">
   <span>Groupe : {{ group.name }}</span>
+  <button mat-icon-button><mat-icon>settings</mat-icon></button>
 </div>
 <div class="members content-card">
   <ng-container *ngIf="members$ | async as members">
