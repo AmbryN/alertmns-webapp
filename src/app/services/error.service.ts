@@ -14,7 +14,7 @@ export class ErrorService {
 
   errors$ = merge(
     this.store.select(loginError),
-    this.store.select(userError)
+    this.store.select(userError) // TODO: add other errors
   ).pipe(
     filter((error) => error != ''),
     tap((error) => this.openSnackBar(error))

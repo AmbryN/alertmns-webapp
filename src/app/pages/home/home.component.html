@@ -1,1 +1,32 @@
-<p>home works!</p>
+<div class="home">
+  <div>
+    <div class="title content-card"><span>Mes dernières nouvelles</span></div>
+    <div
+      class="notifications content-card"
+      *ngIf="notifications$ | async as notifications; else empty"
+    >
+      <mat-card
+        *ngFor="let notification of notifications"
+        class="example-card"
+        [class.seen]="notification.seenAt"
+      >
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>{{ notification.channel.name }}</mat-card-title>
+            <mat-card-subtitle
+              >Nouveau
+              {{
+                notification.type == "MESSAGE" ? "message" : "rendez-vous"
+              }}</mat-card-subtitle
+            >
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>{{
+          notification.createdAt | date : "full"
+        }}</mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #empty> Pas de notifications </ng-template>

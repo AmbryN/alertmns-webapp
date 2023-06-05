@@ -89,6 +89,7 @@ export class ChannelComponent {
           },
         })
       );
+      this.messageForm.reset();
     }
   }
 
