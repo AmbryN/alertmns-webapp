@@ -1,3 +1,13 @@
-<button [routerLink]="['/channels', channel.id]" mat-fab color="accent" id="badge" matBadge="1" matBadgeColor="warn" matBadgeOverlap="true" matTooltip="{{ channel.name }}" matTooltipPosition="right">
+<button
+  [routerLink]="['/channels', channel.id]"
+  mat-fab
+  color="accent"
+  id="badge"
+  matBadge="{{ notifications }}"
+  matBadgeColor="warn"
+  matBadgeOverlap="true"
+  matTooltip="{{ channel.name }}"
+  matTooltipPosition="right"
+>
   {{ channel | shortChannel }}
 </button>

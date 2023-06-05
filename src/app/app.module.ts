@@ -64,6 +64,8 @@ import { AdminChannelsComponent } from './pages/admin/admin-channels/admin-chann
 import { ChannelViewComponent } from './pages/admin/admin-channels/admin-channels/channel-view/channel-view.component';
 import { AddGroupToChannelDialogComponent } from './pages/admin/admin-channels/add-group-to-channel-dialog/add-group-to-channel-dialog.component';
 import { AddChannelDialogComponent } from './pages/admin/admin-channels/add-channel-dialog/add-channel-dialog.component';
+import { notificationReducer } from './state/notifications/notification.reducers';
+import { NotificationEffects } from './state/notifications/notification.effects';
 
 @NgModule({
   declarations: [
@@ -106,6 +108,7 @@ import { AddChannelDialogComponent } from './pages/admin/admin-channels/add-chan
         users: userReducer,
         groups: groupReducer,
         roles: roleReducer,
+        notifications: notificationReducer
       },
       {}
     ),
@@ -118,6 +121,7 @@ import { AddChannelDialogComponent } from './pages/admin/admin-channels/add-chan
       UserEffects,
       GroupEffects,
       RoleEffects,
+      NotificationEffects
     ]),
     BrowserAnimationsModule,
     MatInputModule,
@@ -148,4 +152,4 @@ import { AddChannelDialogComponent } from './pages/admin/admin-channels/add-chan
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

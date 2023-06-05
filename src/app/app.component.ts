@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './state/App.state';
 import { loadProfile } from './state/login/login.action';
-import { ErrorService } from './services/error.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,6 @@ import { ErrorService } from './services/error.service';
 export class AppComponent {
   constructor(
     private store: Store<AppState>,
-    private errorService: ErrorService
   ) {
     this.store.dispatch(loadProfile());
   }

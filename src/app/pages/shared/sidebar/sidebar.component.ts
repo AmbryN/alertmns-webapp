@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Channel } from '../../../models/Channel';
-import { map, Observable } from 'rxjs';
-import { AppState } from '../../../state/App.state';
 import { Store } from '@ngrx/store';
-import { LoginService } from '../../../services/login.service';
-import { selectCurrentUser } from '../../../state/login/login.selectors';
+import { map, Observable, reduce, tap } from 'rxjs';
+import { selectAllNotifications } from 'src/app/state/notifications/notification.selectors';
+import { Channel } from '../../../models/Channel';
 import { User } from '../../../models/User';
+import { AppState } from '../../../state/App.state';
+import { selectCurrentUser } from '../../../state/login/login.selectors';
+import { Notification } from 'src/app/models/Notification';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,13 +14,15 @@ import { User } from '../../../models/User';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
+  notifications$: Observable<Notification[]> = this.store.select(selectAllNotifications);
+  notificationMap: Map<number, number> = new Map<number, number>();
   channels$: Observable<Channel[]> = this.store.select(selectCurrentUser).pipe(
     map((user) => {
       if (user && user.channels) return user.channels;
       else return [];
     })
   );
-  currentUser$: Observable<User | null> = this.store.select(selectCurrentUser);
+  currentUser$: Observable<User | null> = this.store.select(selectCurrentUser)
   isAdmin$: Observable<boolean> = this.currentUser$.pipe(
     map((user) => {
       if (user != null)
@@ -29,5 +32,21 @@ export class SidebarComponent {
       else return false;
     })
   );
-  constructor(private store: Store<AppState>) {}
+
+  constructor(private store: Store<AppState>) {
+    this.notifications$.subscribe((notifications) => {
+      this.notificationMap = notifications.reduce((acc, val) => {
+        if (val.seenAt) {
+          return acc
+        }
+        const value = acc.get(val.channel.id!!);
+        if (value) {
+          acc.set(val.channel.id!!, value + 1);
+        } else {
+          acc.set(val.channel.id!!, 1)
+        }
+        return acc
+      }, new Map<number, number>())
+    })
+  }
 }

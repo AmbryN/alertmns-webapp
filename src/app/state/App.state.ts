@@ -4,6 +4,7 @@ import { LoginState } from './login/login.reducers';
 import { UserState } from './users/user.reducers';
 import { RoleState } from './role/role.reducers';
 import { GroupState } from './group/group.reducers';
+import { NotificationState } from './notifications/notification.reducers';
 
 export interface AppState {
   messages: MessageState;
@@ -12,4 +13,5 @@ export interface AppState {
   users: UserState;
   groups: GroupState;
   roles: RoleState;
+  notifications: NotificationState;
 }

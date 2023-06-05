@@ -18,10 +18,9 @@ import { Router } from '@angular/router';
 export class LoginEffects {
   constructor(
     private actions$: Actions,
-    private store: Store<AppState>,
     private loginService: LoginService,
     private router: Router
-  ) {}
+  ) { }
 
   login$ = createEffect(() =>
     this.actions$.pipe(

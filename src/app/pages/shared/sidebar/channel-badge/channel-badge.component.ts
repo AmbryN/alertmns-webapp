@@ -7,6 +7,7 @@ import { Channel } from '../../../../models/Channel';
   styleUrls: ['./channel-badge.component.scss'],
 })
 export class ChannelBadgeComponent {
+  @Input() notifications: number | undefined;
   @Input() channel: Channel = {
     id: 2,
     name: 'Test',

@@ -9,15 +9,13 @@ import { CompatClient, Stomp } from '@stomp/stompjs';
 import { IncomingMessage } from '../models/IncomingMessage';
 import { environment } from '../../environments/environment';
 
-const messageSocketUrl: string = `ws://localhost:8080/alertmns-api-0.0.1-SNAPSHOT/chat`;
-
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
   stompClient?: CompatClient;
 
-  constructor(private http: HttpClient, private store: Store<AppState>) {}
+  constructor(private http: HttpClient, private store: Store<AppState>) { }
 
   getMessages(channelId: number): Observable<IncomingMessage[]> {
     return this.http.get<IncomingMessage[]>(
@@ -31,7 +29,7 @@ export class MessageService {
       ? `&token=Bearer ${localStorage.getItem('jwt')}`
       : '';
     this.stompClient = Stomp.client(
-      messageSocketUrl + `?channel=${channelId}` + connectionToken
+      environment.socketUrl + `?channel=${channelId}` + connectionToken
     );
     this.stompClient.connect({}, (frame: any) => {
       this.stompClient!.subscribe(
