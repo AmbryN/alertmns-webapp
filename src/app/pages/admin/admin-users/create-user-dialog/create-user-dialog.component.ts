@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { AppState } from '../../../../state/App.state';
 import { Store } from '@ngrx/store';
-import { updateUser } from '../../../../state/users/user.action';
+import { addUser, updateUser } from '../../../../state/users/user.action';
 import { User } from '../../../../models/User';
 import { UserService } from '../../../../services/user.service';
 
@@ -28,11 +28,11 @@ export class CreateUserDialogComponent {
     private store: Store<AppState>,
     private userService: UserService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   onSubmit(): void {
     if (this.userForm.valid) {
-      this.store.dispatch(updateUser({ user: this.userForm.value }));
+      this.store.dispatch(addUser({ user: this.userForm.value }));
     }
   }
 }
