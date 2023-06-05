@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Channel } from '../models/Channel';
+import { Channel } from '../../models/Channel';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { User } from '../models/User';
-import { Group } from '../models/Group';
+import { environment } from '../../../environments/environment';
+import { User } from '../../models/User';
+import { Group } from '../../models/Group';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +43,7 @@ export class ChannelService {
   addGroups(channelId: number, groups: Group[]): Observable<Channel> {
     return this.http.post<Channel>(
       environment.serverUrl + '/channels/' + channelId + '/groups',
-      groups 
+      groups
     );
   }
 

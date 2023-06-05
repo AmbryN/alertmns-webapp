@@ -4,7 +4,7 @@ import { AppState } from '../App.state';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadRoles, loadRolesFailure, loadRolesSuccess } from './role.actions';
 import { catchError, from, map, of, switchMap } from 'rxjs';
-import { RoleService } from '../../services/role.service';
+import { RoleService } from '../../services/role/role.service';
 
 @Injectable()
 export class RoleEffects {

@@ -11,7 +11,7 @@ import { User } from '../../models/User';
 import { delay, map, tap } from 'rxjs';
 import { selectCurrentUser } from '../../state/login/login.selectors';
 import { environment } from '../../../environments/environment';
-import { FileService } from '../../services/file.service';
+import { FileService } from '../../services/file/file.service';
 import { FileFormat } from 'src/app/models/FileFormat';
 import { markNotificationsAsSeen } from 'src/app/state/notifications/notification.action';
 
@@ -65,7 +65,9 @@ export class ChannelComponent {
       if (this.channelId) {
         this.store.dispatch(loadChannel({ channelId: this.channelId }));
         this.store.dispatch(loadMessages({ channelId: this.channelId }));
-        this.store.dispatch(markNotificationsAsSeen({ channelId: this.channelId }));
+        this.store.dispatch(
+          markNotificationsAsSeen({ channelId: this.channelId })
+        );
       }
     });
 

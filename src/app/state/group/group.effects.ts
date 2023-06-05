@@ -20,7 +20,7 @@ import {
   removeUserFromGroupSuccess,
 } from './group.action';
 import { catchError, from, map, of, switchMap } from 'rxjs';
-import { GroupService } from '../../services/group.service';
+import { GroupService } from '../../services/group/group.service';
 
 @Injectable()
 export class GroupEffects {

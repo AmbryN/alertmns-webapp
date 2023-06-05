@@ -8,7 +8,7 @@ import {
 import { AppState } from '../../../../state/App.state';
 import { Store } from '@ngrx/store';
 import { loadUser, updateUser } from '../../../../state/users/user.action';
-import { UserService } from '../../../../services/user.service';
+import { UserService } from '../../../../services/user/user.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from '../../../../models/User';
 import { loadRoles } from '../../../../state/role/role.actions';

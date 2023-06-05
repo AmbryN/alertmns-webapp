@@ -25,7 +25,7 @@ import {
   removeUserFromChannelSuccess,
 } from './channel.action';
 import { catchError, from, map, of, switchMap } from 'rxjs';
-import { ChannelService } from '../../services/channel.service';
+import { ChannelService } from '../../services/channel/channel.service';
 
 @Injectable()
 export class ChannelEffects {
@@ -77,35 +77,37 @@ export class ChannelEffects {
     this.actions$.pipe(
       ofType(addUsersToChannel),
       switchMap((action) =>
-      this.channelService.addUsers(action.channelId, action.users).pipe(
-        map((channel) => addUsersToChannelSuccess({ channel })),
-        catchError((error) => of(addUsersToChannelFailure({ error })))
+        this.channelService.addUsers(action.channelId, action.users).pipe(
+          map((channel) => addUsersToChannelSuccess({ channel })),
+          catchError((error) => of(addUsersToChannelFailure({ error })))
+        )
       )
     )
-  ));
+  );
 
   removeUserFromChannel$ = createEffect(() =>
     this.actions$.pipe(
       ofType(removeUserFromChannel),
       switchMap((action) =>
-      this.channelService.removeUser(action.channelId, action.userId).pipe(
-        map((channel) => removeUserFromChannelSuccess({ channel })),
-        catchError((error) => of(removeUserFromChannelFailure({ error })))
+        this.channelService.removeUser(action.channelId, action.userId).pipe(
+          map((channel) => removeUserFromChannelSuccess({ channel })),
+          catchError((error) => of(removeUserFromChannelFailure({ error })))
+        )
       )
     )
-  ));
-
+  );
 
   addGroupsToChannel$ = createEffect(() =>
     this.actions$.pipe(
       ofType(addGroupsToChannel),
       switchMap((action) =>
-      this.channelService.addGroups(action.channelId, action.groups).pipe(
-        map((channel) => addGroupToChannelSuccess({ channel })),
-        catchError((error) => of(addGroupToChannelFailure({ error })))
+        this.channelService.addGroups(action.channelId, action.groups).pipe(
+          map((channel) => addGroupToChannelSuccess({ channel })),
+          catchError((error) => of(addGroupToChannelFailure({ error })))
+        )
       )
     )
-  ));
+  );
 
   removeGroupFromChannel$ = createEffect(() =>
     this.actions$.pipe(
@@ -116,7 +118,9 @@ export class ChannelEffects {
             .removeGroup(action.channelId, action.groupId)
             .pipe(
               map((channel) => removeGroupFromChannelSuccess({ channel })),
-              catchError((error) => of(removeGroupFromChannelFailure({ error })))
+              catchError((error) =>
+                of(removeGroupFromChannelFailure({ error }))
+              )
             )
         )
       )

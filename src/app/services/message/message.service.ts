@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OutgoingMessage } from '../models/OutgoingMessage';
+import { OutgoingMessage } from '../../models/OutgoingMessage';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AppState } from '../state/App.state';
-import { receiveMessage } from '../state/messages/message.action';
+import { AppState } from '../../state/App.state';
+import { receiveMessage } from '../../state/messages/message.action';
 import { CompatClient, Stomp } from '@stomp/stompjs';
-import { IncomingMessage } from '../models/IncomingMessage';
-import { environment } from '../../environments/environment';
+import { IncomingMessage } from '../../models/IncomingMessage';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ import { environment } from '../../environments/environment';
 export class MessageService {
   stompClient?: CompatClient;
 
-  constructor(private http: HttpClient, private store: Store<AppState>) { }
+  constructor(private http: HttpClient, private store: Store<AppState>) {}
 
   getMessages(channelId: number): Observable<IncomingMessage[]> {
     return this.http.get<IncomingMessage[]>(

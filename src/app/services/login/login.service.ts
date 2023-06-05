@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/User';
+import { User } from '../../models/User';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { TokenResponse } from '../models/TokenResponse';
-import { AppState } from '../state/App.state';
+import { TokenResponse } from '../../models/TokenResponse';
+import { AppState } from '../../state/App.state';
 import { Store } from '@ngrx/store';
-import { loadProfile } from '../state/login/login.action';
-import { environment } from '../../environments/environment';
+import { loadProfile } from '../../state/login/login.action';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

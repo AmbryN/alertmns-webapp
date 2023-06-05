@@ -20,7 +20,7 @@ import {
   updateUserSuccess,
 } from './user.action';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user/user.service';
 
 @Injectable()
 export class UserEffects {

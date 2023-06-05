@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AppState } from '../state/App.state';
+import { AppState } from '../../state/App.state';
 import { Store } from '@ngrx/store';
-import { loginError } from '../state/login/login.selectors';
+import { loginError } from '../../state/login/login.selectors';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { filter, merge, tap } from 'rxjs';
-import { userError } from '../state/users/user.selectors';
+import { userError } from '../../state/users/user.selectors';
 
 @Injectable({
   providedIn: 'root',

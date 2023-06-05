@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { MessageService } from '../../services/message.service';
+import { MessageService } from '../../services/message/message.service';
 import { AppState } from '../App.state';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {

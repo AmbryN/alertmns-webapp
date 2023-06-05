@@ -9,7 +9,7 @@ import { AppState } from '../../../../state/App.state';
 import { Store } from '@ngrx/store';
 import { addUser, updateUser } from '../../../../state/users/user.action';
 import { User } from '../../../../models/User';
-import { UserService } from '../../../../services/user.service';
+import { UserService } from '../../../../services/user/user.service';
 
 @Component({
   selector: 'app-create-user-dialog',
@@ -28,7 +28,7 @@ export class CreateUserDialogComponent {
     private store: Store<AppState>,
     private userService: UserService,
     private formBuilder: FormBuilder
-  ) { }
+  ) {}
 
   onSubmit(): void {
     if (this.userForm.valid) {

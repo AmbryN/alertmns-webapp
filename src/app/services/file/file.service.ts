@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { FileFormat } from '../models/FileFormat';
+import { environment } from '../../../environments/environment';
+import { FileFormat } from '../../models/FileFormat';
 
 @Injectable({
   providedIn: 'root',

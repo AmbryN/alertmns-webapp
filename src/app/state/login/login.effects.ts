@@ -11,7 +11,7 @@ import {
   logout,
 } from './login.action';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../../services/login/login.service';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class LoginEffects {
     private actions$: Actions,
     private loginService: LoginService,
     private router: Router
-  ) { }
+  ) {}
 
   login$ = createEffect(() =>
     this.actions$.pipe(
