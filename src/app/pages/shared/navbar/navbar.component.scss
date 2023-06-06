@@ -1,13 +1,13 @@
 header {
   background-color: var(--color-primary); /*#3E4160;*/
-  min-height: 4em;
+  min-height: 4rem;
   display: flex;
 }
 
 #search_panel {
-  flex: 2;
+  flex: 10;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 
   input {
@@ -15,9 +15,9 @@ header {
     border: none;
     border-radius: 20px;
     padding: 0.5em 1em 0.5em 3em;
-    margin-right: 110px;
     width: 20vw;
     color: #FFFFFF;
+    min-width: 200px;
   }
 
   form {
@@ -35,7 +35,6 @@ header {
 
 #profile_panel {
   flex: 1;
-
   display: flex;
   justify-content: flex-end;
 
@@ -44,7 +43,31 @@ header {
 
     mat-icon {
       margin: auto;
-      //color: #FF9763;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  #search_panel {
+    justify-content: flex-start;
+
+    form {
+      align-items: flex-start;
+
+      input {
+        background-color: #818296;
+        border: none;
+        border-radius: 20px;
+        padding: 0.5em 1em 0.5em 3em;
+        min-width: 200px;
+        color: #FFFFFF;
+      }
+
+      mat-icon {
+        position: relative;
+        left: 30px;
+        color: #FF9763;
+      }
     }
   }
 }

@@ -14,15 +14,18 @@ import { Notification } from 'src/app/models/Notification';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  notifications$: Observable<Notification[]> = this.store.select(selectAllNotifications);
+  notifications$: Observable<Notification[]> = this.store.select(
+    selectAllNotifications
+  );
   notificationMap: Map<number, number> = new Map<number, number>();
   channels$: Observable<Channel[]> = this.store.select(selectCurrentUser).pipe(
     map((user) => {
-      if (user && user.channels) return user.channels;
-      else return [];
+      if (user && user.channels) {
+        return user.channels;
+      } else return [];
     })
   );
-  currentUser$: Observable<User | null> = this.store.select(selectCurrentUser)
+  currentUser$: Observable<User | null> = this.store.select(selectCurrentUser);
   isAdmin$: Observable<boolean> = this.currentUser$.pipe(
     map((user) => {
       if (user != null)
@@ -37,16 +40,16 @@ export class SidebarComponent {
     this.notifications$.subscribe((notifications) => {
       this.notificationMap = notifications.reduce((acc, val) => {
         if (val.seenAt) {
-          return acc
+          return acc;
         }
         const value = acc.get(val.channel.id!!);
         if (value) {
           acc.set(val.channel.id!!, value + 1);
         } else {
-          acc.set(val.channel.id!!, 1)
+          acc.set(val.channel.id!!, 1);
         }
-        return acc
-      }, new Map<number, number>())
-    })
+        return acc;
+      }, new Map<number, number>());
+    });
   }
 }

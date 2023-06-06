@@ -27,3 +27,24 @@ mat-icon {
   height: fit-content;
   font-size: xx-large;
 }
+
+@media (max-width: 900px) {
+  aside {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    background-color: var(--color-primary-dark);/*#000011;*/
+
+    #channels {
+      flex: 10;
+      margin-top: 0;
+      margin-left: 1rem;
+    }
+
+    button {
+      display: none;
+      margin-right: 1rem;
+    }
+  }
+}

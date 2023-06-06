@@ -8,6 +8,7 @@
   top: 20vh;
   margin: 0 auto;
   padding: 2em;
+  min-width: 30vw;
   max-width: 20vw;
   display: flex;
   flex-direction: column;
@@ -49,4 +50,10 @@ button {
 
 a {
   color: #3F8DF3;
+}
+
+@media (max-width: 900px) {
+  #panel {
+    max-width: 80%;
+  }
 }
