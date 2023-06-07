@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  serverUrl: 'http://localhost/api',
-  socketUrl: 'ws://localhost/api/chat',
+  serverUrl: 'http://alert-mns.fr.nf/api',
+  socketUrl: 'ws://alert-mns.fr.nf/api/chat',
 };

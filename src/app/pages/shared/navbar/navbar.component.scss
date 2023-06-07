@@ -48,6 +48,11 @@ header {
 }
 
 @media (max-width: 900px) {
+  header {
+    min-height: 0;
+    height: 4rem;
+  }
+
   #search_panel {
     justify-content: flex-start;
 

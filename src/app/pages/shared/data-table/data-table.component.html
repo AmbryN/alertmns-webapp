@@ -1,19 +1,33 @@
 <div>
   <mat-form-field>
     <mat-label>Filtre</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Mia"
+      #input
+    />
   </mat-form-field>
   <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnName">
+    <ng-container
+      *ngFor="let column of columns"
+      [matColumnDef]="column.columnName"
+    >
       <ng-container *ngIf="column.columnName != 'action'; else action">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column.header}}</th>
-        <td mat-cell *matCellDef="let element"> {{column.cell(element)}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ column.header }}
+        </th>
+        <td mat-cell *matCellDef="let element">{{ column.cell(element) }}</td>
       </ng-container>
 
       <ng-template #action>
-        <th mat-header-cell *matHeaderCellDef>{{column.header}}</th>
+        <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="element">
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            [matMenuTriggerData]="element"
+          >
             <mat-icon color="accent">more_horiz</mat-icon>
           </button>
         </td>
@@ -21,13 +35,13 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
-    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
-
-
+    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns()"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons
-                 aria-label="Choix de la page">
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Choix de la page"
+  >
   </mat-paginator>
 </div>
 <mat-menu #menu="matMenu" id="menu">

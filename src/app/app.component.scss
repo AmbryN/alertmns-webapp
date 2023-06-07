@@ -23,26 +23,29 @@
 @media (max-width: 900px) {
   :host {
     flex-direction: column;
-    height: 100vh;
+    height: 100svh;
+
+    $bar_size: 4rem;
 
     app-sidebar {
+      display: block;
       order: 2;
       max-width: 100%;
-      height: 4rem;
+      height: $bar_size;
     }
 
     main {
+      height: calc(100svh - $bar_size);
       order: 1;
       width: 100%;
-      height: 100%;
-      //overflow: hidden;
+
 
       #content {
         height: 100%;
       }
 
       .router {
-        height: calc(100% - 4rem);
+        height: calc(100% - $bar_size);
       }
     }
   }

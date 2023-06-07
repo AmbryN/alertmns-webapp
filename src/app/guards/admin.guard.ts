@@ -6,12 +6,11 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { filter, map, Observable, of, take } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/App.state';
 import { User } from '../models/User';
 import { selectCurrentUser } from '../state/login/login.selectors';
-import { loadProfile } from '../state/login/login.action';
 
 @Injectable({
   providedIn: 'root',
