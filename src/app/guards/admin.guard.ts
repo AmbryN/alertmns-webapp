@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { filter, map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/App.state';
@@ -15,7 +9,7 @@ import { selectCurrentUser } from '../state/login/login.selectors';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminGuard implements CanActivate {
+export class AdminGuard  {
   currentUser: User | null = null;
   constructor(private store: Store<AppState>, private router: Router) {}
   canActivate(

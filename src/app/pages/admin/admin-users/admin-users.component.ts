@@ -1,4 +1,12 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  Injector,
+  signal,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 import { AppState } from '../../../state/App.state';
@@ -11,7 +19,8 @@ import { deleteUser, loadUsers } from '../../../state/users/user.action';
 import { Column } from '../../shared/data-table/data-table.component';
 import { User } from '../../../models/User';
 import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
-import { filter, map, takeLast } from 'rxjs';
+import { filter, find, map, startWith, switchMap, take, takeLast } from 'rxjs';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-admin-users',
@@ -19,7 +28,12 @@ import { filter, map, takeLast } from 'rxjs';
   styleUrls: ['./admin-users.component.scss'],
 })
 export class AdminUsersComponent {
-  users$ = this.store.select(selectAllUsers);
+  users = toSignal(this.store.select(selectAllUsers), { initialValue: [] });
+  selectedId = signal(0);
+  selectedUser = computed(() =>
+    this.users().find((user) => user.id == this.selectedId())
+  );
+
   userLoadingStatus$ = this.store.select(userStatus);
 
   columns: Column[] = [
@@ -48,16 +62,14 @@ export class AdminUsersComponent {
   constructor(public dialog: MatDialog, private store: Store<AppState>) {
     this.store.dispatch(loadUsers());
   }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateUserDialogComponent);
   }
 
   onUpdate(userId: number): void {
-    const sub = this.users$.subscribe((users) => {
-      let user = users.find((user) => user.id == userId);
-      this.dialog.open(UpdateUserDialogComponent, { data: user });
-    });
-    sub.unsubscribe();
+    this.selectedId.set(userId);
+    this.dialog.open(UpdateUserDialogComponent, { data: this.selectedUser() });
   }
 
   onDelete(userId: number) {

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, effect, Inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -15,7 +15,7 @@ import { loadRoles } from '../../../../state/role/role.actions';
 import { selectAllRoles } from '../../../../state/role/role.selectors';
 import { Role } from '../../../../models/Role';
 import { selectSelectedUser } from '../../../../state/users/user.selectors';
-import { firstValueFrom, map, Subscription, switchMap } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-update-user-dialog',
@@ -24,13 +24,8 @@ import { firstValueFrom, map, Subscription, switchMap } from 'rxjs';
 })
 export class UpdateUserDialogComponent {
   roles$ = this.store.select(selectAllRoles);
-  selectedUserRoles$ = this.store.select(selectSelectedUser).pipe(
-    map((user) => {
-      if (user) return user.roles;
-      else return [{ id: 1, name: 'ROLE_USER' } as Role];
-    })
-  );
-  roleSubscription: Subscription | null = null;
+  selectedUser = toSignal(this.store.select(selectSelectedUser));
+
   userForm: FormGroup = this.formBuilder.group({
     id: [this.data.id],
     firstname: [this.data.firstname, [Validators.required]],
@@ -47,13 +42,11 @@ export class UpdateUserDialogComponent {
   ) {
     this.store.dispatch(loadRoles());
     this.store.dispatch(loadUser({ userId: this.data.id! }));
-    this.roleSubscription = this.selectedUserRoles$.subscribe((roles) => {
-      if (roles) this.roles.setValue(roles);
-    });
+
+    effect(() => this.roles.setValue(this.selectedUser()!.roles!));
   }
 
   onSubmit(): void {
-    console.log(this.userForm.value);
     if (this.userForm.valid) {
       this.store.dispatch(
         updateUser({
@@ -65,9 +58,5 @@ export class UpdateUserDialogComponent {
 
   compare(first: Role, second: Role) {
     return first && second ? first.id === second.id : first === second;
-  }
-
-  onDestroy() {
-    this.roleSubscription?.unsubscribe();
   }
 }

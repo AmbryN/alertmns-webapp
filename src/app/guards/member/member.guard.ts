@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { filter, map, Observable } from 'rxjs';
 import { AppState } from '../../state/App.state';
 import { Store } from '@ngrx/store';
@@ -16,7 +10,7 @@ import { loadProfile } from '../../state/login/login.action';
 @Injectable({
   providedIn: 'root',
 })
-export class MemberGuard implements CanActivate {
+export class MemberGuard  {
   currentUser: User | null = null;
   constructor(private store: Store<AppState>, private router: Router) {
     this.store

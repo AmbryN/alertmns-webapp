@@ -5,10 +5,8 @@
   <ng-container *ngIf="userLoadingStatus$ | async as status">
     <div *ngIf="status != 'loading' else loading">
       <button mat-raised-button color="accent" (click)="openDialog()">Ajouter un utilisateur</button>
-      <ng-container *ngIf="users$ | async as users">
-        <app-data-table [items]="users" [columns]="columns" [hasUpdate]="true" [hasDelete]="true"
-                        (onUpdate)="onUpdate($event)" (onDelete)="onDelete($event)"/>
-      </ng-container>
+      <app-data-table [items]="users()" [columns]="columns" [hasUpdate]="true" [hasDelete]="true"
+                      (onUpdate)="onUpdate($event)" (onDelete)="onDelete($event)"/>
     </div>
   </ng-container>
 </div>
