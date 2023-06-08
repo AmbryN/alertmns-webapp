@@ -88,6 +88,7 @@ export const groupReducer = createReducer(
   on(updateGroupSuccess, (state, { group }) => ({
     ...state,
     groups: [...state.groups.filter((item) => item.id != group.id), group],
+    selectedGroup: group,
     status: "success",
     error: "",
   })),

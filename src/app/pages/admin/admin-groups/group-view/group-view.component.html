@@ -3,7 +3,8 @@
   <button mat-icon-button (click)="openRenameDialog()"><mat-icon>settings</mat-icon></button>
 </div>
 <div class="members content-card">
-  <ng-container *ngIf="members()  as members">
+  <div *ngFor="let member of members()">{{member.firstname}}</div>
+  <ng-container *ngIf="members() as members">
     <button mat-raised-button color="accent" (click)="openDialog()">Ajouter des membres</button>
     <div id="table">
       <app-data-table (onDelete)="onDelete($event)" [items]="members" [columns]="columns" [hasDelete]="true"/>

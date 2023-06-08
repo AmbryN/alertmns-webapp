@@ -150,6 +150,10 @@ export const channelReducer = createReducer(
   on(updateChannelSuccess, (state, { channel }) => ({
     ...state,
     selectedChannel: channel,
+    channels: [
+      ...state.channels.filter((item) => item.id != channel.id),
+      channel,
+    ],
     status: "success",
     error: "",
   })),
