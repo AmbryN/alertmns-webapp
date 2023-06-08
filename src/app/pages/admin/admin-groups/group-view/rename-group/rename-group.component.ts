@@ -1,20 +1,19 @@
 import { Component, Inject } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { AppState } from "../../../../../../state/App.state";
+import { Channel } from "../../../../../models/Channel";
 import { Store } from "@ngrx/store";
-import { Channel } from "../../../../../../models/Channel";
-import { updateChannel } from "../../../../../../state/channels/channel.action";
+import { AppState } from "../../../../../state/App.state";
+import { updateGroup } from "../../../../../state/group/group.action";
 
 @Component({
-  selector: "app-rename-channel-dialog",
-  templateUrl: "./rename-channel-dialog.component.html",
-  styleUrls: ["./rename-channel-dialog.component.scss"],
+  selector: "app-rename-group",
+  templateUrl: "./rename-group.component.html",
+  styleUrls: ["./rename-group.component.scss"],
 })
-export class RenameChannelDialogComponent {
+export class RenameGroupComponent {
   form: FormGroup = new FormGroup({
     id: new FormControl(this.data.channel.id),
-    visibility: new FormControl(this.data.channel.visibility),
     name: new FormControl(this.data.channel.name, [
       Validators.required,
       Validators.minLength(2),
@@ -29,7 +28,7 @@ export class RenameChannelDialogComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      this.store.dispatch(updateChannel({ channel: this.form.value }));
+      this.store.dispatch(updateGroup({ group: this.form.value }));
     }
   }
 }

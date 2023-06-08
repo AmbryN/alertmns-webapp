@@ -1,11 +1,10 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/App.state';
 import { selectAllUsers } from '../../../state/users/user.selectors';
 import { loadUsers } from '../../../state/users/user.action';
 import { User } from '../../../models/User';
 import { Column } from '../data-table/data-table.component';
-import { addUserToGroup } from '../../../state/group/group.action';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -39,7 +38,8 @@ export class AddMemberDialogComponent {
     },
   ];
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: {containerId: number, dispatcher: Function},
+    @Inject(MAT_DIALOG_DATA)
+    private data: { containerId: number; dispatcher: Function },
     private store: Store<AppState>
   ) {
     this.store.dispatch(loadUsers());
@@ -51,7 +51,11 @@ export class AddMemberDialogComponent {
 
   addUsers(selectedUsers: User[]) {
     this.store.dispatch(
-      this.data.dispatcher({ channelId: this.data.containerId, groupId: this.data.containerId, users: selectedUsers })
+      this.data.dispatcher({
+        channelId: this.data.containerId,
+        groupId: this.data.containerId,
+        users: selectedUsers,
+      })
     );
   }
 

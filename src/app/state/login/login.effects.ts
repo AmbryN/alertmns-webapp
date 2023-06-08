@@ -1,7 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '../App.state';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Injectable } from "@angular/core";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import {
   loadProfile,
   loadProfileFailure,
@@ -9,10 +7,10 @@ import {
   login,
   loginFailure,
   logout,
-} from './login.action';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { LoginService } from '../../services/login/login.service';
-import { Router } from '@angular/router';
+} from "./login.action";
+import { catchError, map, of, switchMap, tap } from "rxjs";
+import { LoginService } from "../../services/login/login.service";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class LoginEffects {
@@ -28,20 +26,20 @@ export class LoginEffects {
       switchMap((action) =>
         this.loginService.login(action.user).pipe(
           tap((tokenRes) => {
-            localStorage.setItem('jwt', tokenRes.token);
+            localStorage.setItem("jwt", tokenRes.token);
           }),
-          switchMap((_) =>
+          switchMap(() =>
             this.loginService.getProfile().pipe(
               map((user) => loadProfileSuccess({ user })),
-              tap(() => this.router.navigateByUrl('/')),
+              tap(() => this.router.navigateByUrl("/")),
               catchError((error) => {
-                let message = this.loginService.handleError(error);
+                const message = this.loginService.handleError(error);
                 return of(loadProfileFailure({ error: message }));
               })
             )
           ),
           catchError((error) => {
-            let message = this.loginService.handleError(error);
+            const message = this.loginService.handleError(error);
             return of(loginFailure({ error: message }));
           })
         )
@@ -52,12 +50,12 @@ export class LoginEffects {
   loadProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadProfile),
-      switchMap((action) =>
+      switchMap(() =>
         this.loginService.getProfile().pipe(
           map((user) => loadProfileSuccess({ user })),
           catchError((error) => {
-            let message = this.loginService.handleError(error);
-            this.router.navigateByUrl('/login');
+            const message = this.loginService.handleError(error);
+            this.router.navigateByUrl("/login");
             return of(loadProfileFailure({ error: message }));
           })
         )
@@ -68,8 +66,8 @@ export class LoginEffects {
   logout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(logout),
-      switchMap((action) => {
-        this.router.navigateByUrl('/login');
+      switchMap(() => {
+        this.router.navigateByUrl("/login");
         return this.loginService.logout();
       })
     )

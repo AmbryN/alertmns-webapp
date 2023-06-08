@@ -33,11 +33,11 @@ export class UserEffects {
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadUsers),
-      switchMap((action) =>
+      switchMap(() =>
         this.userService.getUsers().pipe(
           map((users) => loadUsersSuccess({ users })),
           catchError((error) => {
-            let message = this.userService.handle(error);
+            const message = this.userService.handle(error);
             return of(loadUsersFailure({ error: message }));
           })
         )
@@ -52,7 +52,7 @@ export class UserEffects {
         this.userService.getUser(action.userId).pipe(
           map((user) => loadUserSuccess({ user })),
           catchError((error) => {
-            let message = this.userService.handle(error);
+            const message = this.userService.handle(error);
             return of(loadUserFailure({ error: message }));
           })
         )
@@ -67,7 +67,7 @@ export class UserEffects {
         this.userService.addUser(action.user).pipe(
           map((user) => addUserSuccess({ user })),
           catchError((error) => {
-            let message = this.userService.handle(error);
+            const message = this.userService.handle(error);
             return of(addUserFailure({ error: message }));
           })
         )
@@ -82,7 +82,7 @@ export class UserEffects {
         this.userService.updateUser(action.user).pipe(
           map((user) => updateUserSuccess({ user })),
           catchError((error) => {
-            let message = this.userService.handle(error);
+            const message = this.userService.handle(error);
             return of(updateUserFailure({ error: message }));
           })
         )
@@ -95,9 +95,9 @@ export class UserEffects {
       ofType(deleteUser),
       switchMap((action) =>
         this.userService.deleteUser(action.userId).pipe(
-          map((_) => deleteUserSuccess({ userId: action.userId })),
+          map(() => deleteUserSuccess({ userId: action.userId })),
           catchError((error) => {
-            let message = this.userService.handle(error);
+            const message = this.userService.handle(error);
             return of(deleteUserFailure({ error: message }));
           })
         )

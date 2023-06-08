@@ -1,5 +1,5 @@
-import { createReducer, on } from '@ngrx/store';
-import { Channel } from '../../models/Channel';
+import { createReducer, on } from "@ngrx/store";
+import { Channel } from "../../models/Channel";
 import {
   addGroupsToChannel,
   addGroupToChannelFailure,
@@ -24,20 +24,20 @@ import {
   updateChannel,
   updateChannelFailure,
   updateChannelSuccess,
-} from './channel.action';
+} from "./channel.action";
 
 export interface ChannelState {
   channels: Channel[];
   selectedChannel: Channel;
   error: string;
-  status: 'pending' | 'loading' | 'error' | 'success';
+  status: "pending" | "loading" | "error" | "success";
 }
 
 export const initialState: ChannelState = {
   channels: [],
-  selectedChannel: { name: '', visibility: 'PUBLIC', members: [], groups: [] },
-  error: '',
-  status: 'pending',
+  selectedChannel: { name: "", visibility: "PUBLIC", members: [], groups: [] },
+  error: "",
+  status: "pending",
 };
 
 export const channelReducer = createReducer(
@@ -45,117 +45,117 @@ export const channelReducer = createReducer(
   initialState,
   on(loadChannels, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(loadChannelsSuccess, (state, { channels }) => ({
     ...state,
     channels: channels,
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
   on(loadChannelsFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
+    status: "error",
   })),
-  on(loadChannel, (state, { channelId }) => ({
+  on(loadChannel, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(loadChannelSuccess, (state, { channel }) => ({
     ...state,
     selectedChannel: channel,
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
-  on(createChannel, (state, { channel }) => ({
+  on(createChannel, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(createChannelSuccess, (state, { channel }) => ({
     ...state,
     channels: [...state.channels, channel],
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
   on(createChannelFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
+    status: "error",
   })),
-  on(addUsersToChannel, (state, { channelId, users }) => ({
+  on(addUsersToChannel, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(addUsersToChannelSuccess, (state, { channel }) => ({
     ...state,
     selectedChannel: channel,
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
   on(addUsersToChannelFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
+    status: "error",
   })),
-  on(addGroupsToChannel, (state, { channelId, groups }) => ({
+  on(addGroupsToChannel, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(addGroupToChannelSuccess, (state, { channel }) => ({
     ...state,
     selectedChannel: channel,
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
   on(addGroupToChannelFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
+    status: "error",
   })),
-  on(removeUserFromChannel, (state, { channelId, userId }) => ({
+  on(removeUserFromChannel, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(removeUserFromChannelSuccess, (state, { channel }) => ({
     ...state,
     selectedChannel: channel,
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
   on(removeUserFromChannelFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
+    status: "error",
   })),
-  on(removeGroupFromChannel, (state, { channelId, groupId }) => ({
+  on(removeGroupFromChannel, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(removeGroupFromChannelSuccess, (state, { channel }) => ({
     ...state,
     selectedChannel: channel,
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
   on(removeGroupFromChannelFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
+    status: "error",
   })),
-  on(updateChannel, (state, { channel }) => ({
+  on(updateChannel, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(updateChannelSuccess, (state, { channel }) => ({
     ...state,
     selectedChannel: channel,
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
   on(updateChannelFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
+    status: "error",
   }))
 );

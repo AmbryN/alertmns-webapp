@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppState } from '../../../../state/App.state';
 import { Store } from '@ngrx/store';
-import { addUser, updateUser } from '../../../../state/users/user.action';
-import { User } from '../../../../models/User';
+import { addUser } from '../../../../state/users/user.action';
 import { UserService } from '../../../../services/user/user.service';
 
 @Component({

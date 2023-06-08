@@ -7,11 +7,11 @@ import { ListItem } from '../list/list.component';
   styleUrls: ['./side-panel.component.scss'],
 })
 export class SidePanelComponent {
-  @Input() title: string = 'Title';
+  @Input() title = 'Title';
   @Input() list: ListItem[] = [];
   @Input() color: 'light' | 'lightest' | undefined;
-  @Input() hasAddButton: boolean = false;
-  @Input() buttonText: string = 'Ajouter';
+  @Input() hasAddButton = false;
+  @Input() buttonText = 'Ajouter';
 
   @Output() buttonClicked: EventEmitter<MouseEvent> =
     new EventEmitter<MouseEvent>();

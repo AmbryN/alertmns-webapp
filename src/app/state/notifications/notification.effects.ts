@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Injectable } from "@angular/core";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 
-import { catchError, map, of, switchMap } from 'rxjs';
-import { NotificationService } from 'src/app/services/notification/notification.service';
-import { loadProfileSuccess } from '../login/login.action';
+import { catchError, map, of, switchMap } from "rxjs";
+import { NotificationService } from "src/app/services/notification/notification.service";
+import { loadProfileSuccess } from "../login/login.action";
 import {
   loadNotificationsFailure,
   loadNotificationsSuccess,
   markNotificationsAsSeen,
   markNotificationsAsSeenFailure,
   markNotificationsAsSeenSuccess,
-} from './notification.action';
+} from "./notification.action";
 
 @Injectable()
 export class NotificationEffects {
@@ -22,7 +22,7 @@ export class NotificationEffects {
   loadNotifications$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadProfileSuccess),
-      switchMap((action) =>
+      switchMap(() =>
         this.notificationService.getNotifications().pipe(
           map((notifications) =>
             loadNotificationsSuccess({ notifications: notifications })

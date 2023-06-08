@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { MessageService } from '../../services/message/message.service';
-import { AppState } from '../App.state';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { MessageService } from "../../services/message/message.service";
+import { AppState } from "../App.state";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import {
   loadMessages,
   loadMessagesFailure,
@@ -10,8 +10,8 @@ import {
   sendMessage,
   sendMessageFailure,
   sendMessageSuccess,
-} from './message.action';
-import { catchError, from, map, of, switchMap, tap } from 'rxjs';
+} from "./message.action";
+import { catchError, from, map, of, switchMap, tap } from "rxjs";
 
 @Injectable()
 export class MessageEffects {
@@ -40,7 +40,7 @@ export class MessageEffects {
         ofType(sendMessage),
         switchMap((action) =>
           from(this.messageService.saveMessage(action.message)).pipe(
-            map((_) => sendMessageSuccess()),
+            map(() => sendMessageSuccess()),
             catchError((error) => of(sendMessageFailure({ error: error })))
           )
         )

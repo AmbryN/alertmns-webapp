@@ -6,7 +6,6 @@ import { selectAllGroups } from '../../../state/group/group.selectors';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddGroupDialogComponent } from './add-group-dialog/add-group-dialog.component';
-import { loadChannels } from '../../../state/channels/channel.action';
 
 @Component({
   selector: 'app-admin-role',

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '../App.state';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { AppState } from "../App.state";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import {
   addGroup,
   addGroupFailure,
@@ -18,9 +18,12 @@ import {
   removeUserFromGroup,
   removeUserFromGroupFailure,
   removeUserFromGroupSuccess,
-} from './group.action';
-import { catchError, from, map, of, switchMap } from 'rxjs';
-import { GroupService } from '../../services/group/group.service';
+  updateGroup,
+  updateGroupFailure,
+  updateGroupSuccess,
+} from "./group.action";
+import { catchError, from, map, of, switchMap } from "rxjs";
+import { GroupService } from "../../services/group/group.service";
 
 @Injectable()
 export class GroupEffects {
@@ -33,7 +36,7 @@ export class GroupEffects {
   loadGroups$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadGroups),
-      switchMap((action) =>
+      switchMap(() =>
         from(
           this.groupService.getGroups().pipe(
             map((groups) => loadGroupsSuccess({ groups })),
@@ -67,6 +70,18 @@ export class GroupEffects {
       )
     )
   );
+
+  updateGroup$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateGroup),
+      switchMap((action) =>
+        this.groupService.updateGroup(action.group).pipe(
+          map((group) => updateGroupSuccess({ group })),
+          catchError((error) => of(updateGroupFailure({ error })))
+        )
+      )
+    );
+  });
 
   addUserToGroup$ = createEffect(() =>
     this.actions$.pipe(

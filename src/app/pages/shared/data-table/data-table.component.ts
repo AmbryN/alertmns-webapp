@@ -23,10 +23,10 @@ export type Column = {
 export class DataTableComponent {
   @Input() columns: Column[] = [];
   @Input() items: any[] = [];
-  @Input() hasUpdate: boolean = false;
-  @Input() hasDelete: boolean = false;
+  @Input() hasUpdate = false;
+  @Input() hasDelete = false;
 
-  selectedId: number = 0;
+  selectedId = 0;
   @Output() onUpdate: EventEmitter<number> = new EventEmitter<number>();
   @Output() onDelete: EventEmitter<number> = new EventEmitter<number>();
 

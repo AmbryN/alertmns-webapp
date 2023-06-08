@@ -9,9 +9,7 @@ import { loadProfile } from './state/login/login.action';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(
-    private store: Store<AppState>,
-  ) {
-    this.store.dispatch(loadProfile());
+  constructor(private store: Store<AppState>) {
+    if (localStorage.getItem('jwt')) this.store.dispatch(loadProfile());
   }
 }

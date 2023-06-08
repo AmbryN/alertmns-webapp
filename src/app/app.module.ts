@@ -67,6 +67,7 @@ import { AddChannelDialogComponent } from './pages/admin/admin-channels/add-chan
 import { notificationReducer } from './state/notifications/notification.reducers';
 import { NotificationEffects } from './state/notifications/notification.effects';
 import { RenameChannelDialogComponent } from './pages/admin/admin-channels/admin-channels/channel-view/rename-channel-dialog/rename-channel-dialog.component';
+import { RenameGroupComponent } from './pages/admin/admin-groups/group-view/rename-group/rename-group.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { RenameChannelDialogComponent } from './pages/admin/admin-channels/admin
     AddGroupToChannelDialogComponent,
     AddChannelDialogComponent,
     RenameChannelDialogComponent,
+    RenameGroupComponent,
   ],
   imports: [
     BrowserModule,

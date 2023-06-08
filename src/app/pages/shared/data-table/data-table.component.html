@@ -13,7 +13,7 @@
       *ngFor="let column of columns"
       [matColumnDef]="column.columnName"
     >
-      <ng-container *ngIf="column.columnName != 'action'; else action">
+      <ng-container *ngIf="column.columnName !== 'action'; else action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           {{ column.header }}
         </th>

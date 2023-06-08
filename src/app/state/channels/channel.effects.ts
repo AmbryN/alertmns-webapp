@@ -27,7 +27,7 @@ import {
   updateChannelFailure,
   updateChannelSuccess,
 } from './channel.action';
-import { catchError, from, map, of, switchMap, tap } from 'rxjs';
+import { catchError, from, map, of, switchMap } from 'rxjs';
 import { ChannelService } from '../../services/channel/channel.service';
 
 @Injectable()

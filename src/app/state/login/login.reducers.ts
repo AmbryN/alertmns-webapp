@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on } from "@ngrx/store";
 import {
   loadProfile,
   loadProfileFailure,
@@ -7,56 +7,56 @@ import {
   loginFailure,
   loginSuccess,
   logout,
-} from './login.action';
-import { User } from '../../models/User';
+} from "./login.action";
+import { User } from "../../models/User";
 
 export interface LoginState {
   user: User | null;
   error: string;
-  status: 'pending' | 'loading' | 'error' | 'success';
+  status: "pending" | "loading" | "error" | "success";
 }
 
 export const initialState: LoginState = {
   user: null,
-  error: '',
-  status: 'pending',
+  error: "",
+  status: "pending",
 };
 
 export const loginReducer = createReducer(
   // Supply initial state
   initialState,
   // Add a new message to the messages array
-  on(login, (state, { user }) => ({
+  on(login, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(loginSuccess, (state, { user }) => ({
     ...state,
     user,
-    status: 'success',
+    status: "success",
   })),
   on(loginFailure, (state, { error }) => ({
     ...state,
     error,
-    status: 'error',
+    status: "error",
   })),
   on(loadProfile, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(loadProfileSuccess, (state, { user }) => ({
     ...state,
     user,
-    status: 'success',
+    status: "success",
   })),
   on(loadProfileFailure, (state, { error }) => ({
     ...state,
     error,
-    status: 'error',
+    status: "error",
   })),
   on(logout, (state) => ({
     ...state,
     user: null,
-    status: 'pending',
+    status: "pending",
   }))
 );

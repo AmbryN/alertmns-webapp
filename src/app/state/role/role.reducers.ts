@@ -1,18 +1,17 @@
-import { createReducer, on } from '@ngrx/store';
-import { loadRoles, loadRolesFailure, loadRolesSuccess } from './role.actions';
-import { Group } from '../../models/Group';
-import { Role } from '../../models/Role';
+import { createReducer, on } from "@ngrx/store";
+import { loadRoles, loadRolesFailure, loadRolesSuccess } from "./role.actions";
+import { Role } from "../../models/Role";
 
 export interface RoleState {
   roles: Role[];
   error: string;
-  status: 'pending' | 'loading' | 'error' | 'success';
+  status: "pending" | "loading" | "error" | "success";
 }
 
 export const initialState: RoleState = {
   roles: [],
-  error: '',
-  status: 'pending',
+  error: "",
+  status: "pending",
 };
 
 export const roleReducer = createReducer(
@@ -20,17 +19,17 @@ export const roleReducer = createReducer(
   initialState,
   on(loadRoles, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(loadRolesSuccess, (state, { roles }) => ({
     ...state,
     roles,
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
   on(loadRolesFailure, (state, { error }) => ({
     ...state,
     error,
-    status: 'error',
+    status: "error",
   }))
 );

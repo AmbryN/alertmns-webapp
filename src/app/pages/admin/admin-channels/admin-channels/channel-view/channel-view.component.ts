@@ -1,32 +1,31 @@
-import { Component } from '@angular/core';
-import { selectedChannel } from '../../../../../state/channels/channel.selectors';
-import { map, Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../../../state/App.state';
-import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { AddMemberDialogComponent } from '../../../../shared/add-member-dialog/add-member-dialog.component';
-import { User } from '../../../../../models/User';
+import { Component } from "@angular/core";
+import { selectedChannel } from "../../../../../state/channels/channel.selectors";
+import { map, Subscription } from "rxjs";
+import { Store } from "@ngrx/store";
+import { AppState } from "../../../../../state/App.state";
+import { ActivatedRoute } from "@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { AddMemberDialogComponent } from "../../../../shared/add-member-dialog/add-member-dialog.component";
+import { User } from "../../../../../models/User";
 import {
   addGroupsToChannel,
   addUsersToChannel,
   loadChannel,
   removeGroupFromChannel,
   removeUserFromChannel,
-  updateChannel,
-} from '../../../../../state/channels/channel.action';
-import { Group } from '../../../../../models/Group';
-import { AddGroupToChannelDialogComponent } from '../../add-group-to-channel-dialog/add-group-to-channel-dialog.component';
-import { RenameChannelDialogComponent } from './rename-channel-dialog/rename-channel-dialog.component';
-import { Channel } from '../../../../../models/Channel';
+} from "../../../../../state/channels/channel.action";
+import { Group } from "../../../../../models/Group";
+import { AddGroupToChannelDialogComponent } from "../../add-group-to-channel-dialog/add-group-to-channel-dialog.component";
+import { RenameChannelDialogComponent } from "./rename-channel-dialog/rename-channel-dialog.component";
+import { Channel } from "../../../../../models/Channel";
 
 @Component({
-  selector: 'app-channel-view',
-  templateUrl: './channel-view.component.html',
-  styleUrls: ['./channel-view.component.scss'],
+  selector: "app-channel-view",
+  templateUrl: "./channel-view.component.html",
+  styleUrls: ["./channel-view.component.scss"],
 })
 export class ChannelViewComponent {
-  channelId: number = 0;
+  channelId = 0;
   selectedChannel$ = this.store.select(selectedChannel);
   members$ = this.selectedChannel$.pipe(map((channel) => channel.members));
   groups$ = this.selectedChannel$.pipe(map((channel) => channel.groups));
@@ -36,41 +35,41 @@ export class ChannelViewComponent {
 
   columns = [
     {
-      header: 'Prénom',
-      columnName: 'firstname',
+      header: "Prénom",
+      columnName: "firstname",
       cell: (element: User) => `${element.firstname}`,
     },
     {
-      header: 'Nom',
-      columnName: 'lastname',
+      header: "Nom",
+      columnName: "lastname",
       cell: (element: User) => `${element.lastname}`,
     },
     {
-      header: 'E-mail',
-      columnName: 'email',
+      header: "E-mail",
+      columnName: "email",
       cell: (element: User) => `${element.email}`,
     },
     {
-      header: 'Actions',
-      columnName: 'action',
+      header: "Actions",
+      columnName: "action",
       cell: () => ``,
     },
   ];
 
   columns_group = [
     {
-      header: 'Id',
-      columnName: 'id',
+      header: "Id",
+      columnName: "id",
       cell: (element: Group) => `${element.id}`,
     },
     {
-      header: 'Nom',
-      columnName: 'name',
+      header: "Nom",
+      columnName: "name",
       cell: (element: Group) => `${element.name}`,
     },
     {
-      header: 'Actions',
-      columnName: 'action',
+      header: "Actions",
+      columnName: "action",
       cell: () => ``,
     },
   ];
@@ -81,7 +80,7 @@ export class ChannelViewComponent {
     private dialog: MatDialog
   ) {
     this.route.paramMap.subscribe((params) => {
-      this.channelId = Number(params.get('id'));
+      this.channelId = Number(params.get("id"));
       this.store.dispatch(loadChannel({ channelId: this.channelId }));
     });
 
@@ -116,7 +115,7 @@ export class ChannelViewComponent {
 
   openRenameDialog(): void {
     this.dialog.open(RenameChannelDialogComponent, {
-      data: { channel: this.selectedChannel!, dispatcher: updateChannel },
+      data: { channel: this.selectedChannel! },
     });
   }
 }

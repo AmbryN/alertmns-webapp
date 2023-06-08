@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { map, Observable, reduce, tap } from 'rxjs';
-import { selectAllNotifications } from 'src/app/state/notifications/notification.selectors';
-import { Channel } from '../../../models/Channel';
-import { User } from '../../../models/User';
-import { AppState } from '../../../state/App.state';
-import { selectCurrentUser } from '../../../state/login/login.selectors';
-import { Notification } from 'src/app/models/Notification';
+import { Component } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { map, Observable } from "rxjs";
+import { selectAllNotifications } from "src/app/state/notifications/notification.selectors";
+import { Channel } from "../../../models/Channel";
+import { User } from "../../../models/User";
+import { AppState } from "../../../state/App.state";
+import { selectCurrentUser } from "../../../state/login/login.selectors";
+import { Notification } from "src/app/models/Notification";
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  selector: "app-sidebar",
+  templateUrl: "./sidebar.component.html",
+  styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent {
   notifications$: Observable<Notification[]> = this.store.select(
@@ -30,7 +30,7 @@ export class SidebarComponent {
     map((user) => {
       if (user != null)
         return (
-          user!.roles!.find((role) => role.name == 'ROLE_ADMIN') != undefined
+          user!.roles!.find((role) => role.name == "ROLE_ADMIN") != undefined
         );
       else return false;
     })

@@ -31,7 +31,7 @@ export class MessageService {
     this.stompClient = Stomp.client(
       environment.socketUrl + `?channel=${channelId}` + connectionToken
     );
-    this.stompClient.connect({}, (frame: any) => {
+    this.stompClient.connect({}, () => {
       this.stompClient!.subscribe(
         `/topic/messages/${channelId}`,
         (message: any) => {

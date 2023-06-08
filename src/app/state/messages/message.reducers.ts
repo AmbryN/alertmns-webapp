@@ -1,5 +1,5 @@
-import { OutgoingMessage } from '../../models/OutgoingMessage';
-import { createReducer, on } from '@ngrx/store';
+import { OutgoingMessage } from "../../models/OutgoingMessage";
+import { createReducer, on } from "@ngrx/store";
 import {
   sendMessage,
   loadMessages,
@@ -8,23 +8,23 @@ import {
   receiveMessage,
   sendMessageSuccess,
   sendMessageFailure,
-} from './message.action';
-import { IncomingMessage } from '../../models/IncomingMessage';
+} from "./message.action";
+import { IncomingMessage } from "../../models/IncomingMessage";
 
 export interface MessageState {
   channelId?: number;
   messages: IncomingMessage[];
   messageToSend: OutgoingMessage;
   error: string;
-  status: 'pending' | 'loading' | 'error' | 'success';
+  status: "pending" | "loading" | "error" | "success";
 }
 
 export const initialState: MessageState = {
   channelId: undefined,
   messages: [],
   messageToSend: {} as OutgoingMessage,
-  error: '',
-  status: 'pending',
+  error: "",
+  status: "pending",
 };
 
 export const messageReducer = createReducer(
@@ -40,29 +40,29 @@ export const messageReducer = createReducer(
     messages: [...state.messages, message],
   })),
   // Load existing messages
-  on(loadMessages, (state, { channelId }) => ({
+  on(loadMessages, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(loadMessagesSuccess, (state, { messages }) => ({
     ...state,
     messages: messages,
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
   on(loadMessagesFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
+    status: "error",
   })),
   on(sendMessageSuccess, (state) => ({
     ...state,
-    status: 'success',
-    error: '',
+    status: "success",
+    error: "",
   })),
   on(sendMessageFailure, (state, { error }) => ({
     ...state,
-    status: 'error',
+    status: "error",
     error: error,
   }))
 );

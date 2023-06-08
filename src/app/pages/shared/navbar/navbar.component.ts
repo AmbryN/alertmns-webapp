@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../../../services/login/login.service';
 import { User } from '../../../models/User';
 import { AppState } from '../../../state/App.state';
 import { Store } from '@ngrx/store';
