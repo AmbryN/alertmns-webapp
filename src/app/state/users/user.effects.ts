@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '../App.state';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { AppState } from "../App.state";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import {
   addUser,
   addUserFailure,
   addUserSuccess,
+  batchUploadUsers,
+  batchUploadUsersFailure,
+  batchUploadUsersSuccess,
   deleteUser,
   deleteUserFailure,
   deleteUserSuccess,
@@ -18,16 +21,18 @@ import {
   updateUser,
   updateUserFailure,
   updateUserSuccess,
-} from './user.action';
-import { catchError, map, of, switchMap } from 'rxjs';
-import { UserService } from '../../services/user/user.service';
+} from "./user.action";
+import { catchError, map, of, switchMap } from "rxjs";
+import { UserService } from "../../services/user/user.service";
+import { FileService } from "../../services/file/file.service";
 
 @Injectable()
 export class UserEffects {
   constructor(
     private actions$: Actions,
     private store: Store<AppState>,
-    private userService: UserService
+    private userService: UserService,
+    private fileService: FileService
   ) {}
 
   loadUsers$ = createEffect(() =>
@@ -100,6 +105,18 @@ export class UserEffects {
             const message = this.userService.handle(error);
             return of(deleteUserFailure({ error: message }));
           })
+        )
+      )
+    )
+  );
+
+  batchUploadUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(batchUploadUsers),
+      switchMap((action) =>
+        this.fileService.upload(action.file).pipe(
+          map((users) => batchUploadUsersSuccess({ users })),
+          catchError((error) => of(batchUploadUsersFailure({ error })))
         )
       )
     )

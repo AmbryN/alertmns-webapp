@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Importer un CSV</h2>
+<mat-dialog-content class="mat-typography">
+  <form>
+      <mat-label>Fichier</mat-label>
+      <input type="file" (change)="onFileSelected($event)">
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" mat-dialog-close>Annuler</button>
+  <button mat-raised-button color="accent" [mat-dialog-close]="true" (click)="onSubmit()" cdkFocusInitial>Ajouter</button>
+</mat-dialog-actions>

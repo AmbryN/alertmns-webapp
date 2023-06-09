@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on } from "@ngrx/store";
 import {
   updateUser,
   addUserFailure,
@@ -14,21 +14,24 @@ import {
   loadUser,
   loadUserSuccess,
   loadUserFailure,
-} from './user.action';
-import { User } from '../../models/User';
+  batchUploadUsers,
+  batchUploadUsersSuccess,
+  batchUploadUsersFailure,
+} from "./user.action";
+import { User } from "../../models/User";
 
 export interface UserState {
   users: User[];
   selectedUser: User | null;
   error: string;
-  status: 'pending' | 'loading' | 'error' | 'success';
+  status: "pending" | "loading" | "error" | "success";
 }
 
 export const initialState: UserState = {
   users: [],
   selectedUser: null,
-  error: '',
-  status: 'pending',
+  error: "",
+  status: "pending",
 };
 
 export const userReducer = createReducer(
@@ -36,72 +39,87 @@ export const userReducer = createReducer(
   initialState,
   on(loadUsers, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(loadUsersSuccess, (state, { users }) => ({
     ...state,
     users,
-    status: 'success',
+    status: "success",
   })),
   on(loadUsersFailure, (state, { error }) => ({
     ...state,
     error,
-    status: 'error',
+    status: "error",
   })),
   on(loadUser, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(loadUserSuccess, (state, { user }) => ({
     ...state,
     selectedUser: user,
-    status: 'success',
+    status: "success",
   })),
   on(loadUserFailure, (state, { error }) => ({
     ...state,
     error,
-    status: 'error',
+    status: "error",
   })),
   on(updateUser, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(addUserSuccess, (state, { user }) => ({
     ...state,
     users: [...state.users, user],
-    status: 'success',
+    status: "success",
   })),
   on(addUserFailure, (state, { error }) => ({
     ...state,
     error,
-    status: 'error',
+    status: "error",
   })),
   on(updateUser, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(updateUserSuccess, (state, { user }) => ({
     ...state,
     users: [...state.users.filter((item) => item.id != user.id), user],
-    status: 'success',
+    status: "success",
   })),
   on(updateUserFailure, (state, { error }) => ({
     ...state,
     error,
-    status: 'error',
+    status: "error",
   })),
   on(deleteUser, (state) => ({
     ...state,
-    status: 'loading',
+    status: "loading",
   })),
   on(deleteUserSuccess, (state, { userId }) => ({
     ...state,
     users: state.users.filter((user) => user.id != userId),
-    status: 'success',
+    status: "success",
   })),
   on(deleteUserFailure, (state, { error }) => ({
     ...state,
-    status: 'error',
+    status: "error",
+    error,
+  })),
+  on(batchUploadUsers, (state) => ({
+    ...state,
+    status: "loading",
+  })),
+  on(batchUploadUsersSuccess, (state, { users }) => ({
+    ...state,
+    users: [...state.users, ...users],
+    status: "success",
+    error: "",
+  })),
+  on(batchUploadUsersFailure, (state, { error }) => ({
+    ...state,
+    status: "error",
     error,
   }))
 );

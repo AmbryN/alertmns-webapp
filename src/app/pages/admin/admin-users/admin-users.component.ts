@@ -1,22 +1,23 @@
-import { Component, computed, signal } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
-import { AppState } from '../../../state/App.state';
-import { Store } from '@ngrx/store';
+import { Component, computed, signal } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { CreateUserDialogComponent } from "./create-user-dialog/create-user-dialog.component";
+import { AppState } from "../../../state/App.state";
+import { Store } from "@ngrx/store";
 import {
   selectAllUsers,
   userStatus,
-} from '../../../state/users/user.selectors';
-import { deleteUser, loadUsers } from '../../../state/users/user.action';
-import { Column } from '../../shared/data-table/data-table.component';
-import { User } from '../../../models/User';
-import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
-import { toSignal } from '@angular/core/rxjs-interop';
+} from "../../../state/users/user.selectors";
+import { deleteUser, loadUsers } from "../../../state/users/user.action";
+import { Column } from "../../shared/data-table/data-table.component";
+import { User } from "../../../models/User";
+import { UpdateUserDialogComponent } from "./update-user-dialog/update-user-dialog.component";
+import { toSignal } from "@angular/core/rxjs-interop";
+import { ImportUserDialogComponent } from "./import-user-dialog/import-user-dialog.component";
 
 @Component({
-  selector: 'app-admin-users',
-  templateUrl: './admin-users.component.html',
-  styleUrls: ['./admin-users.component.scss'],
+  selector: "app-admin-users",
+  templateUrl: "./admin-users.component.html",
+  styleUrls: ["./admin-users.component.scss"],
 })
 export class AdminUsersComponent {
   users = toSignal(this.store.select(selectAllUsers), { initialValue: [] });
@@ -29,23 +30,23 @@ export class AdminUsersComponent {
 
   columns: Column[] = [
     {
-      header: 'Prénom',
-      columnName: 'firstname',
+      header: "Prénom",
+      columnName: "firstname",
       cell: (element: User) => `${element.firstname}`,
     },
     {
-      header: 'Nom',
-      columnName: 'lastname',
+      header: "Nom",
+      columnName: "lastname",
       cell: (element: User) => `${element.lastname}`,
     },
     {
-      header: 'E-mail',
-      columnName: 'email',
+      header: "E-mail",
+      columnName: "email",
       cell: (element: User) => `${element.email}`,
     },
     {
-      header: 'Actions',
-      columnName: 'action',
+      header: "Actions",
+      columnName: "action",
       cell: () => ``,
     },
   ];
@@ -56,6 +57,10 @@ export class AdminUsersComponent {
 
   openDialog(): void {
     this.dialog.open(CreateUserDialogComponent);
+  }
+
+  openImportDialog(): void {
+    this.dialog.open(ImportUserDialogComponent);
   }
 
   onUpdate(userId: number): void {

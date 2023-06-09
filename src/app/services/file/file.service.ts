@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { FileFormat } from '../../models/FileFormat';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpResponse } from "@angular/common/http";
+import { map, Observable } from "rxjs";
+import { environment } from "../../../environments/environment";
+import { FileFormat } from "../../models/FileFormat";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class FileService {
   constructor(private http: HttpClient) {}
@@ -18,21 +18,21 @@ export class FileService {
       .get<HttpResponse<Blob>>(
         environment.serverUrl + `/export/${channelId}?format=${format}`,
         {
-          observe: 'response',
-          responseType: 'arraybuffer' as 'json',
+          observe: "response",
+          responseType: "arraybuffer" as "json",
         }
       )
       .pipe(
         map((response: any) => {
           const contentDisposition: string = response.headers.get(
-            'content-disposition'
+            "content-disposition"
           );
           const filename = contentDisposition.substring(21);
           const file = new File([response.body], filename, {
             type: response.body.type,
           });
 
-          const downloadLink = document.createElement('a');
+          const downloadLink = document.createElement("a");
           downloadLink.href = URL.createObjectURL(file);
           downloadLink.download = filename;
           downloadLink.click();
@@ -40,5 +40,9 @@ export class FileService {
           return response;
         })
       );
+  }
+
+  upload(file: FormData): Observable<any> {
+    return this.http.post(environment.serverUrl + "/import", file);
   }
 }
