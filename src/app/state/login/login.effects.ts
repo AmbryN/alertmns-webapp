@@ -6,6 +6,7 @@ import {
   loadProfileSuccess,
   login,
   loginFailure,
+  loginSuccess,
   logout,
 } from "./login.action";
 import { catchError, map, of, switchMap, tap } from "rxjs";
@@ -27,17 +28,9 @@ export class LoginEffects {
         this.loginService.login(action.user).pipe(
           tap((tokenRes) => {
             localStorage.setItem("jwt", tokenRes.token);
+            this.router.navigateByUrl("/");
           }),
-          switchMap(() =>
-            this.loginService.getProfile().pipe(
-              map((user) => loadProfileSuccess({ user })),
-              tap(() => this.router.navigateByUrl("/")),
-              catchError((error) => {
-                const message = this.loginService.handleError(error);
-                return of(loadProfileFailure({ error: message }));
-              })
-            )
-          ),
+          map(() => loginSuccess()),
           catchError((error) => {
             const message = this.loginService.handleError(error);
             return of(loginFailure({ error: message }));
@@ -49,7 +42,7 @@ export class LoginEffects {
 
   loadProfile$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadProfile),
+      ofType(loadProfile, loginSuccess),
       switchMap(() =>
         this.loginService.getProfile().pipe(
           map((user) => loadProfileSuccess({ user })),

@@ -30,9 +30,8 @@ export const loginReducer = createReducer(
     ...state,
     status: "loading",
   })),
-  on(loginSuccess, (state, { user }) => ({
+  on(loginSuccess, (state) => ({
     ...state,
-    user,
     status: "success",
   })),
   on(loginFailure, (state, { error }) => ({
