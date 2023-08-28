@@ -11,5 +11,6 @@ import { loadProfile } from './state/login/login.action';
 export class AppComponent {
   constructor(private store: Store<AppState>) {
     if (localStorage.getItem('jwt')) this.store.dispatch(loadProfile());
+    loadProfile();
   }
 }
