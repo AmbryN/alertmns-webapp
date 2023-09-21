@@ -5,7 +5,7 @@ being able to create public and private discussions channels, sending and receiv
 meetings in channels, sending attachements, notifying users of a new message or meeting in one of the channels
 they subscribed to.
 
-This frontend application is designed to wire up with the Jakarta EE REST API, developed in parallel.
+This frontend application is designed to wire up with the Spring REST API, developed in parallel.
 
 ## Use case
 
